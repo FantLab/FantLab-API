@@ -1,2 +1,2 @@
 # Fantlab-API
-Документация API портала fantlab.ru
+Начать отсюда: https://goo.gl/CwQfmb
