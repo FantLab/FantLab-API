@@ -1,25 +1,9 @@
 # Fantlab-API
-Начать отсюда: https://goo.gl/CwQfmb
 
-1. Список авторов.
-Запрос: https://api.fantlab.ru/autorsall
-Результат:
-`
-{
-    list: [
-    {
-        autor_id: int,
-        is_fv: int (0/1 = false/true),
-        name: String,
-        name_orig: String|null,
-        name_rp: String|null,
-        name_short: String|null,
-        type: String
-    },
-    ...
-    ],
-    liter: String,
-    liter_code: int|null,
-    liter_list: String
-}
-`
+Публичный гитхаб-репозиторий по API для биболиобазы fantlab.ru
+В настоящий момент исспользуется для информирования о процессе работы над API сайта через тикет-систему Issues и для взаимодействия API фантлаба и работающих с ним программистов самого ФЛ и использующих его  клиентами и веб-сервисами.
+
+Обновляемое руководство по API сайта - https://goo.gl/CwQfmb
+(обратите внимание, что до релиза первой версии API возможно большие изменения в API-выдачах)
+
+Предложения и замечания по работе API пишите в Issues данного репозитория.
