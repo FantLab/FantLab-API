@@ -5,6 +5,11 @@
 GET /work/{id}
 ```
 
+Пример:
+```
+GET [/work/1](https://api.fantlab.ru/work/1) - Дэн Симменс
+```
+
 Ответ:
 ```
 {
