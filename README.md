@@ -131,12 +131,16 @@ GET /autor/{id}/extended
     image: String,                    # ссылка на основное фото автора
     image_preview: String,            # ссылка на превью основного фото автора
     is_opened: Int,                   # открыта ли страница автора (1 - да, 0 - нет)
-    la_resume: ?|null,
+    la_resume: [ |null                # лингвоанализ (при запросе с ключом la_resume=1)
+        ...: String,                  # отдельный пункт анализа
+        ...
+    ],
     last_modified: Date,              # дата последнего редактирования (в формате YYYY-MM-DD HH:mm:SS)
     name: String,                     # имя на русском языке
     name_orig: String,                # имя в оригинале
     name_pseudonyms: [                # список псевдонимов
         ...: String,
+        ...
     ],
     name_rp: String,                  # имя на русском языке в родительном падеже
     name_short: String,               # имя на русском языке для перечислений (сначала фамилия, затем имя)
