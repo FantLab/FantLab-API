@@ -49,12 +49,12 @@ GET /work/{id}
     public_download_file: Int,         # есть файл для скачивания/чтения (1 - "доступно для свободного чтения")
 
     rating: {
-        rating: "8.74",                # рейтинг
-        voters: "7180"                 # кол-во оценок
+        rating: Double,                # рейтинг
+        voters: Int,                   # кол-во оценок
     },
-    val_midmark_by_weight: "8.74",     # рейтинг (дубль)
-    val_voters: "7180",                # кол-во оценок (дубль)
-    val_responsecount: "265",          # кол-во отзывов на произведение
+    val_midmark_by_weight: Double,     # рейтинг (дубль)
+    val_voters: Int,                   # кол-во оценок (дубль)
+    val_responsecount: Int,            # кол-во отзывов на произведение
 
     work_type: String,                 # тип провездения (роман, повесть, рассказ & etc)
     work_type_id: Int,                 # id типа произведения
