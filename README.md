@@ -54,4 +54,54 @@ GET /autorsall
 ```
 
 ## Автор
-To be continued...
+Запрос:
+```
+GET /autor/{id}?biography={0/1}&awards={0/1}&la_resume={0/1}&cycles_blocks={0/1}&works_blocks={0/1}
+```
+Параметры (все, кроме id, опциональны):
+```
+id - id автора,
+biography - выводить ли блок биографии,
+awards - выводить ли блок наград,
+la_resume - выводить ли блок лингвоанализа,
+cycles_blocks - выводить ли блок с циклами,
+works_blocks - выводить ли блок отдельных произведений
+```
+Пример:
+```
+GET /autor/133?biography=1&awards=1&la_resume=1&cycles_blocks=1&works_blocks=1 - Джордж Р.Р. Мартин
+```
+Альтернативный запрос для получения всей информации:
+```
+GET /autor/{id}/extended
+```
+Ответ:
+```
+{
+    anons: String,              # краткий анонс биографии
+    autor_id: Int,              # id автора
+    birthday: Date|null,        # дата рождения (в формате YYYY-MM-DD)
+    country_id: Int|null,       # id страны
+    country_name: String,       # название страны
+    deathday: Date|null,        # дата смерти (в формате YYYY-MM-DD)
+    fantastic: Int,             # ?
+    image: String,              # ссылка на основное фото автора
+    image_preview: String,      # ссылка на превью основного фото автора
+    is_opened: Int,             # открыта ли страница автора (1 - да, 0 - нет)
+    last_modified: Date,        # дата последнего редактирования (в формате YYYY-MM-DD HH:mm:SS)
+    name: String,               # имя на русском языке
+    name_orig: String,          # имя в оригинале
+    name_pseudonyms: [          # список псевдонимов
+        ...: String,
+    ],
+    name_rp: String,            # имя на русском языке в родительном падеже
+    name_short: String,         # имя на русском языке для перечислений (сначала фамилия, затем имя)
+    sex: String,                # пол ("m" - мужской, "f" - женский)
+    stat: {                     # статистика
+        editioncount: Int,      # количество изданий
+        markcount: Int,         # количество поставленных автору оценок
+        moviecount: Int,        # количество фильмов (экранизаций и т.д.)
+        responsecount: Int      # количество написанных на произведения автора отзывов
+    }
+}
+```
