@@ -79,31 +79,59 @@ GET /autor/{id}/extended
 Ответ:
 ```
 {
-    anons: String,              # краткий анонс биографии
-    autor_id: Int,              # id автора
-    birthday: Date|null,        # дата рождения (в формате YYYY-MM-DD)
-    country_id: Int|null,       # id страны
-    country_name: String,       # название страны
-    deathday: Date|null,        # дата смерти (в формате YYYY-MM-DD)
-    fantastic: Int,             # ?
-    image: String,              # ссылка на основное фото автора
-    image_preview: String,      # ссылка на превью основного фото автора
-    is_opened: Int,             # открыта ли страница автора (1 - да, 0 - нет)
-    last_modified: Date,        # дата последнего редактирования (в формате YYYY-MM-DD HH:mm:SS)
-    name: String,               # имя на русском языке
-    name_orig: String,          # имя в оригинале
-    name_pseudonyms: [          # список псевдонимов
+    anons: String,                    # краткий анонс биографии
+    autor_id: Int,                    # id автора
+    awards: [ |null                   # список наград (при запросе с ключом awards=1)
+    ],
+    biography: String|null,           # биография (при запросе с ключом biography=1)
+    biography_notes: String|null,     # примечания к биографии (при запросе с ключом biography=1)
+    birthday: Date|null,              # дата рождения (в формате YYYY-MM-DD)
+    compiler: String|null,            # составитель библиографии (при запросе с ключом biography=1)
+    country_id: Int|null,             # id страны
+    country_name: String,             # название страны
+    curator: Int|null,                # id куратора библиографии
+    cycles: [ |null
+    ],
+    cycles_blocks: [ |null
+    ],
+    deathday: Date|null,              # дата смерти (в формате YYYY-MM-DD)
+    fantastic: Int,                   # ?
+    fl_blog_anons: String|null,       # ?
+    image: String,                    # ссылка на основное фото автора
+    image_preview: String,            # ссылка на превью основного фото автора
+    is_opened: Int,                   # открыта ли страница автора (1 - да, 0 - нет)
+    la_resume: ?|null,
+    last_modified: Date,              # дата последнего редактирования (в формате YYYY-MM-DD HH:mm:SS)
+    name: String,                     # имя на русском языке
+    name_orig: String,                # имя в оригинале
+    name_pseudonyms: [                # список псевдонимов
         ...: String,
     ],
-    name_rp: String,            # имя на русском языке в родительном падеже
-    name_short: String,         # имя на русском языке для перечислений (сначала фамилия, затем имя)
-    sex: String,                # пол ("m" - мужской, "f" - женский)
-    stat: {                     # статистика
-        editioncount: Int,      # количество изданий
-        markcount: Int,         # количество поставленных автору оценок
-        moviecount: Int,        # количество фильмов (экранизаций и т.д.)
-        responsecount: Int      # количество написанных на произведения автора отзывов
-    }
+    name_rp: String,                  # имя на русском языке в родительном падеже
+    name_short: String,               # имя на русском языке для перечислений (сначала фамилия, затем имя)
+    registered_user_id: Int|null,         # id автора как пользователя Fantlab'а (если зарегистрирован)
+    registered_user_login: String|null,   # логин автора как пользователя Fantlab'а,
+    registered_user_sex: String|null,     # пол автора как пользователя Fantlab'а ("m" - мужской, "f" - женский)
+    sex: String,                      # пол ("m" - мужской, "f" - женский)
+    sites: [ |null                    # сайты автора (при запросе с ключом biography=1)
+        {
+            descr: String,            # описание ссылки
+            site: String              # ссылка
+        },
+        ...
+    ],
+    source: String|null,              # описание источника биографии
+    source_link: String|null,         # ссылка на источник биографии
+    stat: {                           # статистика
+        editioncount: Int,            # количество изданий
+        markcount: Int,               # количество поставленных автору оценок
+        moviecount: Int,              # количество фильмов (экранизаций и т.д.)
+        responsecount: Int            # количество написанных на произведения автора отзывов
+    },
+    works: [ |null
+    ],
+    works_blocks: [ |null
+    ]
 }
 ```
 ## Произведение
