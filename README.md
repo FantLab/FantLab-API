@@ -81,12 +81,43 @@ GET /autor/{id}/extended
 {
     anons: String,                    # краткий анонс биографии
     autor_id: Int,                    # id автора
-    awards: [ |null                   # список наград (при запросе с ключом awards=1)
-    ],
+    awards: { |null                   # список наград (при запросе с ключом awards=1)
+        nom: [
+            {
+                award_icon: String,             # ссылка на логотип премии
+                award_id: Int,                  # id премии
+                award_in_list: Int,             # ?
+                award_is_opened: Int,           # открыта ли страница премии (1 - да, 0 - нет)
+                award_name: String,             # название премии
+                award_rusname: String,          # русскоязычное название премии
+                contest_id: Int,                # id конкурса
+                contest_name: String,           # название конкурса (обычно сопадает с годом)
+                contest_year: Int,              # год проведения конкурса
+                cw_id: Int,                     # ?
+                cw_is_winner: Int,              # ?
+                cw_postfix: String,             # ?
+                cw_prefix: String,              # ?
+                nomination_id: Int|null,             # id номинации
+                nomination_name: String|null,        # название номинации
+                nomination_rusname: String|null,     # русскоязычное название номинации
+                work_id: Int,                   # id награжденного произведения (0, если награда относится не к произведению)
+                work_name: String,              # название награжденного произведения
+                work_rusname: String,           # русскоязычное название награжденного произведения
+                work_year: Int|null             # год публикации произведения
+            },
+            ...
+        ],
+        win: [
+            {
+                ...                             # те же самые поля
+            },
+            ...
+        ]
+    },
     biography: String|null,           # биография (при запросе с ключом biography=1)
-    biography_notes: String|null,     # примечания к биографии (при запросе с ключом biography=1)
+    biography_notes: String|null,     # примечания к биографии (при запросе с любыми ключами)
     birthday: Date|null,              # дата рождения (в формате YYYY-MM-DD)
-    compiler: String|null,            # составитель библиографии (при запросе с ключом biography=1)
+    compiler: String|null,            # составитель библиографии (при запросе с любыми ключами)
     country_id: Int|null,             # id страны
     country_name: String,             # название страны
     curator: Int|null,                # id куратора библиографии
@@ -113,20 +144,22 @@ GET /autor/{id}/extended
     registered_user_login: String|null,   # логин автора как пользователя Fantlab'а,
     registered_user_sex: String|null,     # пол автора как пользователя Fantlab'а ("m" - мужской, "f" - женский)
     sex: String,                      # пол ("m" - мужской, "f" - женский)
-    sites: [ |null                    # сайты автора (при запросе с ключом biography=1)
+    sites: [ |null                    # сайты автора (при запросе с любыми ключами)
         {
             descr: String,            # описание ссылки
             site: String              # ссылка
         },
         ...
     ],
-    source: String|null,              # описание источника биографии
-    source_link: String|null,         # ссылка на источник биографии
+    source: String|null,              # описание источника биографии (при запросе с любыми ключами)
+    source_link: String|null,         # ссылка на источник биографии (при запросе с любыми ключами)
     stat: {                           # статистика
+        awardcount: Int|null,         # количество наград (при запросе с любыми ключами)
         editioncount: Int,            # количество изданий
         markcount: Int,               # количество поставленных автору оценок
         moviecount: Int,              # количество фильмов (экранизаций и т.д.)
-        responsecount: Int            # количество написанных на произведения автора отзывов
+        responsecount: Int,           # количество написанных на произведения автора отзывов
+        workcount: Int|null           # количество произведений (при запросе с любыми ключами)
     },
     works: [ |null
     ],
