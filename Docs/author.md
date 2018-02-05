@@ -110,10 +110,67 @@ GET /autor/{id}/extended
         responsecount: Int,           # количество написанных на произведения автора отзывов
         workcount: Int|null           # [any] количество произведений
     },
-    works: [ |null
-    ],
-    works_blocks: [ |null
-    ]
+    works: ?|null,
+    works_blocks: { |null             # [biblio_blocks] блок отдельных произведений
+        {block_id}: {                 # id блока (см. константы)
+            id: Int,                  # id блока (совпадает с block_id)
+            list: [
+                {
+                    authors: [                   # список авторов
+                        {
+                            id: Int,             # id автора
+                            name: String,        # русскоязычное имя автора
+                            type: String         # тип автора (autor|art)        
+                        },
+                        ...
+                    ],
+                    position_index: Int|null,           # ?
+                    position_is_node: Int,              # ?
+                    position_level: Int,                # ?
+                    position_show_in_biblio: Int,              # ?
+                    position_show_subworks_in_biblio: Int,     # ?
+                    public_download_file: Int,                 # доступен ли файл с текстом для скачивания (1 - да, 0 - нет)
+                    publish_status: String,                    # статус публикации
+                    val_midmark: Float|null,                   # простое среднее по оценкам (эта цифра видна только в Рейтинг -> Подробнее)
+                    val_midmark_by_weight: Float|null,         # рейтинг произведения
+                    val_midmark_rating: Float|null,            # ?
+                    val_rating: Float|null,                    # ? (совпадает с val_midmark_rating)
+                    val_responsecount: Int|null,               # количество отзывов на произведение
+                    val_voters: Int|null,                      # количество голосов в рейтинге
+                    work_id: Int,                       # id произведения
+                    work_lp: Int,                       # ?
+                    work_name: String,                  # русскоязычное название произведения
+                    work_name_alt: String,              # альтернативные названия
+                    work_name_bonus: String,            # ?
+                    work_name_orig: String,             # название произведения в оригинале
+                    work_notfinished: Int,              # произведение не закончено (1 - да, 0 - нет)
+                    work_preparing: Int,                # произведение в планах (1 - да, 0 - нет)
+                    work_published: Int,                # произведение опубликовано (1 - да, 0 - нет)
+                    work_root_saga: [                   # список "родительских" произведений
+                        {
+                            prefix: String,             # степень отношения произведения к "родителю" (например, "входит в ")
+                            work_id: Int,               # id произведения
+                            work_name: String,          # русскоязычное название произведения
+                            work_type: String,          # тип произведения
+                            work_type_id: Int,          # id типа произведения
+                            work_type_in: String        # ?
+                        },
+                        ...
+                    ],
+                    work_type: String,                  # тип произведения
+                    work_type_icon: String,             # иконку какого типа произведений показывать
+                    work_type_id: Int,                  # id типа произведения
+                    work_type_name: String,             # название типа произведения
+                    work_year: ?|null,                  # год публикации
+                    work_year_of_write: ?|null          # год написания
+                },
+                ...
+            ],
+            name: String,             # категория блока
+            title: String             # русскоязычное название блока
+        },
+        ...
+    }
 }
 ```
 ## Список отзывов на произведения
