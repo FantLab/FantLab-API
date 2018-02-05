@@ -2,7 +2,7 @@
 ## Основная информация
 Запрос
 ```
-GET /autor/{id}?biography={0/1}&awards={0/1}&la_resume={0/1}&cycles_blocks={0/1}&works_blocks={0/1}
+GET /autor/{id}?biography={0|1}&awards={0|1}&la_resume={0|1}&cycles_blocks={0|1}&works_blocks={0|1}
 ```
 Параметры
 ```
@@ -119,7 +119,7 @@ GET /autor/{id}/extended
 ## Список отзывов на произведения
 Запрос
 ```
-GET /autor/{id}/responses?page={page}&sort={date/rating/mark}
+GET /autor/{id}/responses?page={page}&sort={date|rating|mark}
 ```
 Параметры
 ```
@@ -155,7 +155,7 @@ GET /autor/133/responses?page=2&sort=rating - 50-100 отзывы (по убыв
 ## Список изданий
 Запрос
 ```
-GET /autor/{id}/alleditions?editions_blocks={0/1}
+GET /autor/{id}/alleditions?editions_blocks={0|1}
 ```
 Параметры
 ```
@@ -237,7 +237,7 @@ GET /autor/133/alleditions?editions_blocks=1 - список всех издан�
 ## Список наград отдельно
 Запрос
 ```
-GET /autor/{id}/awards?sort={byorder/byaward/bychrono/bywork}
+GET /autor/{id}/awards?sort={byorder|byaward|bychrono|bywork}
 ```
 Параметры
 ```
@@ -257,3 +257,44 @@ GET /autor/133/awards?sort=bywork - награды Дж. Р.Р. Мартина, 
 ]
 ```
 **Nota bene**: список отдается без разбиения по категориям
+## Подписка на оповещения о новых произведениях/изданиях
+Запрос
+```
+GET https://fantlab.ru/notification/subscribe/autors/{id}/{works|editions}.json
+```
+Параметры
+```
+id - id автора
+cookie - авторизационный хэдер (fl_s=*)
+```
+Пример
+```
+GET https://fantlab.ru/notification/subscribe/autors/133/works.json - подписка на оповещения о новых произведениях Дж. Р.Р. Мартина
+```
+Ответ
+```
+{
+    id: Int,         # id подписки
+    status: Int      # статус операции (1 - успех, 0 - провал)
+}
+```
+## Отмена конкретной подписки
+Запрос
+```
+GET https://fantlab.ru/notification/unsubscribe/{id}.json
+```
+Параметры
+```
+id - id подписки
+cookie - авторизационный хэдер (fl_s=*)
+```
+Пример
+```
+GET https://fantlab.ru/notification/unsubscribe/1.json - отписка от оповещений по подписке №1
+```
+Ответ
+```
+{
+    status: Int      # статус операции (1 - успех, 0 - провал)
+}
+```
