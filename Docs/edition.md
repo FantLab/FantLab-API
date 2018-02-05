@@ -11,7 +11,7 @@ images_plus - выводить ли доп. изображения (необяз
 ```
 Пример
 ```
-/edition/35437?content=1&images_plus=1
+/edition/35437?content=1&images_plus=1 - Стивен Кинг "Верткая пуля"
 ```
 Альтернативный запрос для получения всей информации
 ```
@@ -20,7 +20,10 @@ GET /edition/{id}/extended
 Ответ
 ```
 {
-    content: ?|null,         # содержание
+    content: [ |null         # [content] содержание
+        ...: String,
+        ...
+    ],
     copies: Int,             # тираж (0, если неизвестен)
     correct_level: Float,    # степень проверенности издания (0 - не проверено, 0.5 - не полностью проверено, 1 - проверено)
     cover_type: String,      # тип обложки
@@ -61,9 +64,37 @@ GET /edition/{id}/extended
     ],
     format: String,          # формат издания
     format_mm: String,       # формат издания (в мм.)
-    image: String,           # ссылка на обложку издания
-    image_preview: String,   # ссылка на превью обложки
-    images_plus: ?|null,
+    image: String,           # ссылка на основную обложку издания
+    image_preview: String,   # ссылка на превью основной обложки
+    images_plus: { |null     # [images_plus] доп. изображения
+        cover: {             # обложки
+            1: {             # номер обложки (используется для сопоставления корешка и обложки)
+                check: Int,                     # ?
+                image: String,                  # ссылка на обложку
+                image_preview: String|null,     # ссылка на превью обложки
+                pic_copyright: ?,               # ?
+                pic_orig: Int,                  # ?
+                pic_text: String,               # ?
+                pic_type: Int                   # ?
+            },
+            2: { |null
+                ... 
+            },
+            ...
+        },
+        plus: [ |null        # доп. изображения (суперобложки и т.д.)
+            {
+                ...          # те же самые поля, что и в cover -> int
+            },
+            ...
+        ],
+        spine: { |null       # корешки
+            1: {
+                ...          # те же самые поля, что и в cover -> int
+            },
+            ...
+        }
+    },
     isbns: [                 # все isbn-коды издания
         ...: String|null,
         ...
@@ -78,10 +109,10 @@ GET /edition/{id}/extended
     preread: Int,            # есть ли отрывок для чтения (1 - да, 0 - нет)
     series: [                # серии, в которые входит издание
         { |null
-            id: Int,         # id серии
-            is_opened: Int,  # открыта ли страница серии (1 - да, 0 - нет)
-            name: String,    # название серии
-            type: String     # тип (series) 
+            id: Int,             # id серии
+            is_opened: Int,      # открыта ли страница серии (1 - да, 0 - нет)
+            name: String,        # название серии
+            type: String         # тип (series) 
         },
         ...
     ],
