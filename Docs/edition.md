@@ -68,7 +68,7 @@ GET /edition/{id}/extended
     image_preview: String,   # ссылка на превью основной обложки
     images_plus: { |null     # [images_plus] доп. изображения
         cover: {             # обложки
-            1: {             # номер обложки (используется для сопоставления корешка и обложки)
+            1: {             # порядковый номер обложки (используется для сопоставления корешка и обложки)
                 check: Int,                     # ?
                 image: String,                  # ссылка на обложку
                 image_preview: String|null,     # ссылка на превью обложки
@@ -76,9 +76,6 @@ GET /edition/{id}/extended
                 pic_orig: Int,                  # ?
                 pic_text: String,               # ?
                 pic_type: Int                   # ?
-            },
-            2: { |null
-                ... 
             },
             ...
         },
