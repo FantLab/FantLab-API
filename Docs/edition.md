@@ -2,7 +2,7 @@
 ## Основная информация
 Запрос
 ```
-GET /edition/{id}?content={0/1}&images_plus={0/1}
+GET /edition/{id}?content={0|1}&images_plus={0|1}
 ```
 Параметры
 ```
@@ -119,3 +119,24 @@ GET /edition/{id}/extended
     year: Int                # год издания
 }
 ```
+## Добавление или удаление с книжной полки
+Запрос
+```
+/GET /bookcaseclick{edition_id}bc{bookcase_id}change{true|false}
+```
+Параметры
+```
+edition_id - id издания
+bookcase_id - id книжной полки
+cookie - авторизационный хэдер (fl_s=*)
+```
+Пример
+```
+/GET /bookcaseclick35437bc1changetrue - добавить "Верткую пулю" Стивена Кинга на книжную полку с id = 1
+```
+Ответ
+```
+HTML-разметка страницы издания
+```
+*TODO:* отдельный endpoint для работы с книжными полками?
+**Nota bene:** узнать, на каких полках есть произведение, пока невозможно
