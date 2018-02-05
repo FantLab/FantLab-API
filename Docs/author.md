@@ -1,31 +1,31 @@
 # Автор
-Запрос:
+Запрос
 ```
 GET /autor/{id}?biography={0/1}&awards={0/1}&la_resume={0/1}&cycles_blocks={0/1}&works_blocks={0/1}
 ```
-Параметры (все, кроме *id*, опциональны):
+Параметры
 ```
 id - id автора,
-biography - выводить ли блок биографии,
-awards - выводить ли блок наград,
-la_resume - выводить ли блок лингвоанализа,
-cycles_blocks - выводить ли блок с циклами,
-works_blocks - выводить ли блок отдельных произведений
+biography - выводить ли блок биографии (необязательный),
+awards - выводить ли блок наград (необязательный),
+la_resume - выводить ли блок лингвоанализа (необязательный),
+cycles_blocks - выводить ли блок с циклами (необязательный),
+works_blocks - выводить ли блок отдельных произведений (необязательный)
 ```
-Пример:
+Пример
 ```
 GET /autor/133?biography=1&awards=1&la_resume=1&cycles_blocks=1&works_blocks=1 - Джордж Р.Р. Мартин
 ```
-Альтернативный запрос для получения всей информации:
+Альтернативный запрос для получения всей информации
 ```
 GET /autor/{id}/extended
 ```
-Ответ:
+Ответ
 ```
 {
     anons: String,                    # краткий анонс биографии
     autor_id: Int,                    # id автора
-    awards: { |null                   # список наград (при запросе с ключом awards=1)
+    awards: { |null                   # [awards] список наград
         nom: [
             {
                 award_icon: String,             # ссылка на логотип премии
@@ -58,10 +58,10 @@ GET /autor/{id}/extended
             ...
         ]
     },
-    biography: String|null,           # биография (при запросе с ключом biography=1)
-    biography_notes: String|null,     # примечания к биографии (при запросе с любыми ключами)
+    biography: String|null,           # [biography] биография
+    biography_notes: String|null,     # [any] примечания к биографии
     birthday: Date|null,              # дата рождения (в формате YYYY-MM-DD)
-    compiler: String|null,            # составитель библиографии (при запросе с любыми ключами)
+    compiler: String|null,            # [any] составитель библиографии
     country_id: Int|null,             # id страны
     country_name: String,             # название страны
     curator: Int|null,                # id куратора библиографии
@@ -75,7 +75,7 @@ GET /autor/{id}/extended
     image: String,                    # ссылка на основное фото автора
     image_preview: String,            # ссылка на превью основного фото автора
     is_opened: Int,                   # открыта ли страница автора (1 - да, 0 - нет)
-    la_resume: [ |null                # лингвоанализ (при запросе с ключом la_resume=1)
+    la_resume: [ |null                # [la_resume] лингвоанализ
         ...: String,                  # отдельный пункт анализа
         ...
     ],
@@ -92,22 +92,22 @@ GET /autor/{id}/extended
     registered_user_login: String|null,   # логин автора как пользователя Fantlab'а,
     registered_user_sex: String|null,     # пол автора как пользователя Fantlab'а ("m" - мужской, "f" - женский)
     sex: String,                      # пол ("m" - мужской, "f" - женский)
-    sites: [ |null                    # сайты автора (при запросе с любыми ключами)
+    sites: [ |null                    # [any] сайты автора
         {
             descr: String,            # описание ссылки
             site: String              # ссылка
         },
         ...
     ],
-    source: String|null,              # описание источника биографии (при запросе с любыми ключами)
-    source_link: String|null,         # ссылка на источник биографии (при запросе с любыми ключами)
+    source: String|null,              # [any] описание источника биографии
+    source_link: String|null,         # [any] ссылка на источник биографии
     stat: {                           # статистика
-        awardcount: Int|null,         # количество наград (при запросе с любыми ключами)
+        awardcount: Int|null,         # [any] количество наград
         editioncount: Int,            # количество изданий
         markcount: Int,               # количество поставленных автору оценок
         moviecount: Int,              # количество фильмов (экранизаций и т.д.)
         responsecount: Int,           # количество написанных на произведения автора отзывов
-        workcount: Int|null           # количество произведений (при запросе с любыми ключами)
+        workcount: Int|null           # [any] количество произведений
     },
     works: [ |null
     ],
