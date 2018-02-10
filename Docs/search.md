@@ -154,19 +154,19 @@ onlymatches - выдавать только содержимое массива 
 ```
 [
     {
-        autors: String,         # список авторов (могут быть bb-теги)
-        comment: String,        # комментарий (могут быть bb-теги)
-        compilers: String,      # список составителей
+        autors: String,         # список авторов (могут присутствовать bb-теги)
+        comment: String,        # комментарий
+        compilers: String,      # список составителей (могут присутствовать bb-теги)
         correct: Int,           # уровень проверенности издания (0 - красный, 1 - желтый, 2 - зеленый)
         doc: Int,               # ?
         edition_id: Int,        # id издания
         isbn1: String,          # список isbn с разделителями ("-")
         isbn2: String,          # список isbn без разделителей
-        name: String,           # название (могут быть bb-теги)
+        name: String,           # название (могут присутствовать bb-теги)
         notes: String,          # примечания
         plan_date: ?,           # ?
-        publisher: String,      # издательство (могут быть bb-теги)
-        series: String,         # серия (могут быть bb-теги)
+        publisher: String,      # издательство (могут присутствовать bb-теги)
+        series: String,         # серия (могут присутствовать bb-теги)
         weight: Int,            # степень релевантности
         year: Int               # год издания
     },
@@ -209,39 +209,6 @@ onlymatches - выдавать только содержимое массива 
     ...
 ]
 ```
-## Поиск статей
-Запрос
-```
-/GET /search-articles?q={query}&page={page}&onlymatches={0|1}
-```
-Параметры
-```
-query - строка поиска. В качестве разделителя используется "+"
-page - номер страницы (необязательный; по-умолчанию 1)
-onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
-```
-Пример
-```
-/GET /search-articles?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
-```
-Ответ (при запросе с параметром **onlymatches=1**)
-```
-[
-    {
-        article_id: Int,     # id статьи
-        autor: String,       # автор
-        comment: String,     # комментарий
-        doc: Int,            # ?
-        name: String,        # название
-        source: String,      # источник статьи
-        text: String,        # текст
-        weight: Int,         # степень релевантности
-        year: Int            # год публикации
-    },
-    ...
-]
-```
-
 ## Поиск фильмов
 Запрос
 ```
@@ -273,6 +240,77 @@ onlymatches - выдавать только содержимое массива 
         tagline: String,         # слоган
         weight: Int,             # степень релевантности
         year: Int                # год
+    },
+    ...
+]
+```
+## Поиск статей
+Запрос
+```
+/GET /search-articles?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-articles?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        article_id: Int,     # id статьи
+        autor: String,       # автор
+        comment: String,     # комментарий
+        doc: Int,            # ?
+        name: String,        # название
+        source: String,      # источник статьи
+        text: String,        # текст
+        weight: Int,         # степень релевантности
+        year: Int            # год публикации
+    },
+    ...
+]
+```
+## Поиск книжных серий
+Запрос
+```
+/GET /search-series?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-series?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        comment: String,                   # комментарий
+        description: String,               # описание (могут присутствовать bb-теги)
+        doc: Int,                          # ?
+        editions_count: Int,               # количество изданий в серии
+        name: String,                      # название
+        publisher: String,                 # издательство (могут присутствовать bb-теги)
+        publisher_alt_names: String,       # ?
+        publisher_comment: String,         # ?
+        publisher_description: String,     # ?
+        publisher_name: String,            # ?
+        publisher_notes: String,           # ?
+        publishers: String,                # полный список изданий
+        series_id: Int,                    # id книжной серии
+        weight: Int,                       # степень релевантности
+        year_close: Int,                   # год закрытия серии
+        year_open: Int,                    # год открытия серии
     },
     ...
 ]
