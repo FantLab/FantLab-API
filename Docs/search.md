@@ -349,3 +349,39 @@ onlymatches - выдавать только содержимое массива 
     ...
 ]
 ```
+## Поиск издательств
+Запрос
+```
+/GET /search-publishers?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-publishers?q=Москва&page=1&onlymatches=1 - поиск по фразе "Москва"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        alt_names: String,      # список альтернативных названий издтельства
+        city: String,           # город
+        comment: String,        # комментарий
+        country: String,        # страна
+        country_id: Int,        # id страны
+        description: String,    # описание (могут присутствовать bb-теги)
+        doc: Int,               # ?
+        name: String,           # название
+        notes: String,          # заметки
+        publisher_id: Int,      # id издательства
+        weight: Int,            # степень релевантности
+        year_close: Int,        # год закрытия
+        year_open: Int          # год открытия
+    },
+    ...
+]
+```
