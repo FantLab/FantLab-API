@@ -46,7 +46,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-autors?q=Dan+Simmons&page=1&onlymatches=1 - поиск по фразе "Dan Simmons"
+/GET /search-autors?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -85,14 +85,14 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-works?q=Dan+Simmons&page=1&onlymatches=1 - поиск по фразе "Dan Simmons"
+/GET /search-works?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
 [
     {
         all_autor_name: String,        # список всех авторов в оригинале
-        all_autor_rusname: String,     # список всех авторов на русском языке
+        all_autor_rusname: String,     # список всех авторов на русском языке (без bb-тегов)
         altname: String,               # ?
         autor1_id: Int,                # id 1-го автора
         autor1_is_opened: Int,         # открыта ли страница 1-го автора
@@ -136,4 +136,76 @@ onlymatches - выдавать только содержимое массива 
 ]
 ```
 ## Поиск изданий
-To be described
+Запрос
+```
+/GET /search-editions?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-editions?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        autors: String,         # список авторов (могут быть bb-теги)
+        comment: String,        # комментарий (могут быть bb-теги)
+        compilers: String,      # список составителей
+        correct: Int,           # уровень проверенности издания (0 - красный, 1 - желтый, 2 - зеленый)
+        doc: Int,               # ?
+        edition_id: Int,        # id издания
+        isbn1: String,          # список isbn с разделителями ("-")
+        isbn2: String,          # список isbn без разделителей
+        name: String,           # название (могут быть bb-теги)
+        notes: String,          # примечания
+        plan_date: ?,           # ?
+        publisher: String,      # издательство (могут быть bb-теги)
+        series: String,         # серия (могут быть bb-теги)
+        weight: Int,            # степень релевантности
+        year: Int               # год издания
+    },
+    ...
+]
+```
+## Поиск премий
+Запрос
+```
+/GET /search-awards?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-awards?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        awards_id: Int,            # id премии
+        country: String,           # страна вручения
+        country_id: Int,           # id страны вручения
+        description: String,       # описание
+        doc: Int,                  # ?
+        lang_id: Int,              # id языка премии
+        name: String,              # название
+        notes: String,             # примечания
+        rusname: String,           # русскоязычное название
+        type: Int,                 # ?
+        weight: Int,               # степень релевантности
+        year_close: Int,           # год окончания вручения премии
+        year_open: Int             # год старта вручения премии
+    },
+    ...
+]
+```
