@@ -315,3 +315,37 @@ onlymatches - выдавать только содержимое массива 
     ...
 ]
 ```
+## Поиск персон
+Запрос
+```
+/GET /search-persons?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-persons?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        allnames: String,      # список имен (русскоязычное, оригинальное и т.д.)
+        biography: String,     # биография
+        birthyear: Int,        # год рождения
+        country: String,       # страна
+        country_id: Int,       # id страны
+        deathyear: Int,        # год смерти
+        doc: Int,              # ?
+        name: String,          # русскоязычное имя
+        person_id: Int,        # id персоны
+        type: String,          # тип персоны (итоговая ссылка для перехода на страницу персоны на сайте: https://fantlab.ru/{type}{person_id})
+        weight: Int            # степень релевантности
+    },
+    ...
+]
+```
