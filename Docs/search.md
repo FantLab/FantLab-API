@@ -209,3 +209,35 @@ onlymatches - выдавать только содержимое массива 
     ...
 ]
 ```
+## Поиск статей
+Запрос
+```
+/GET /search-articles?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-articles?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        article_id: Int,     # id статьи
+        autor: String,       # автор
+        comment: String,     # комментарий
+        doc: Int,            # ?
+        name: String,        # название
+        source: String,      # источник статьи
+        text: String,        # текст
+        weight: Int,         # степень релевантности
+        year: Int            # год публикации
+    },
+    ...
+]
+```
