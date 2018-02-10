@@ -22,47 +22,7 @@ sort - вариант сортировки (необязательный; по-�
     award_type: Int,           # ?
     comment: String,           # комментарий
     compiler: String,          # ?
-    contests: [ |null          # [include_contests] список конкурсов
-        {
-            award_id: Int,                       # id премии
-            award_name: String|null,             # название премии в оригинале (!= null при sort=contest)
-            award_rusname: String|null,          # русскоязычное название премии (!= null при sort=contest)
-            contest_id: Int|null,                # id конкурса (!= null при sort=contest)
-            contest_works: [ |null               # список победителей по номинациям в конкурсе
-                {
-                    autor_rusname: String,            # русскоязычное имя автора
-                    award_opened: Boolean,            # открыта ли страница премии
-                    contest_id: Int,                  # id конкурса
-                    contest_work_id: Int,             # id номинанта конкурса
-                    contest_year: Int,                # год проведения конкурса
-                    cw_link_id: Int,                  # id номинанта
-                    cw_link_type: String,             # тип номинанта (work, autor и т.д.) (итоговая сслыка: https://fantlab.ru/{cw_link_type}{cw_link_id})
-                    cw_name: String,                  # автор + имя/название номинанта в оригинале
-                    cw_number: Int,                   # ?
-                    cw_postfix: String,               # ?
-                    cw_prefix: String,                # ?
-                    cw_rusname: String,               # русскоязычные автор + имя/название номинанта
-                    cw_winner: Boolean,               # победитель (в данном случае всегда 1)
-                    nomination_id: Int,               # id номинации
-                    nomination_name: String,          # название номинации в оригинале
-                    nomination_number: Int,           # порядковый номер номинации
-                    nomination_rusname: String,       # русскоязычное название номинации
-                    work_rusname: String              # русскоязычное имя/название номинанта
-                },
-                ...
-            ],
-            date: Date|null,                     # дата проведения конкурса (в формате YYYY-MM-DD) (!= null при sort=contest)
-            description: String|null,            # описание конкурса (!= null при sort=contest)
-            description_length: Int|null,        # длина описания (в символах) (!= null при sort=contest)
-            name: String,                        # название конкурса в оригинале
-            name_year: String|null,              # ? (!= null при sort=contest)
-            nomination_id: Int|null,             # id номинации (!= null при sort=nomi)
-            non_winner_count: Int|null,          # ? (!= null при sort=contest)
-            number: Int|null,                    # ? (!= null при sort=contest)
-            place: String|null,                  # место проведения (!= null при sort=contest)
-            rusname: String|null,                # русскоязычное название конкурса (!= null при sort=nomi)
-            short_description: String|null       # краткое описание (!= null при sort=contest)
-        },
+    contests: [ |null          # [include_contests] список конкурсов (см. ниже)
         ...
     ],
     copyright: String,         # ?
@@ -94,5 +54,17 @@ sort - вариант сортировки (необязательный; по-�
     process_status: String,    # ?
     rusname: String,           # русскоязычное название
     show_in_list: Boolean      # ?
+}
+```
+Выдача массива *contests* зависит от варианта сортировки. При **sort=contest** выдача полностью совпадает с выдачей [конкурса](contest.md#Конкурс). При **sort=nomi** выдача выглядит следующим образом:
+```
+{
+    award_id: Int,        # id премии
+    contest_works: [      # список номинантов
+        ...               # выдача номинанта совпадает с contest -> contest_works (см. Конкурс)
+    ],
+    name: String,         # название номинации в оригинале
+    nomination_id: Int,   # id номинации
+    rusname: String       # русскоязычное название номинации
 }
 ```
