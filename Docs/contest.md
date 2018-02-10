@@ -16,9 +16,9 @@ GET /contest/7955?include_works=1 - Хьюго 2017г. с номинантами
 ```
 {
     award_id: Int,                  # id премии
-    award_name: String,             # название премии в оригинале (!= null при sort=contest)
-    award_rusname: String,          # русскоязычное название премии (!= null при sort=contest)
-    contest_id: Int,                # id конкурса (!= null при sort=contest)
+    award_name: String,             # название премии в оригинале
+    award_rusname: String,          # русскоязычное название премии
+    contest_id: Int,                # id конкурса
     contest_works: [ |null          # список победителей по номинациям в конкурсе
         {
             autor_rusname: String,            # русскоязычное имя автора
@@ -42,14 +42,14 @@ GET /contest/7955?include_works=1 - Хьюго 2017г. с номинантами
         },
         ...
     ],
-    date: Date,                     # дата проведения конкурса (в формате YYYY-MM-DD) (!= null при sort=contest)
-    description: String,            # описание конкурса (!= null при sort=contest)
-    description_length: Int,        # длина описания (в символах) (!= null при sort=contest)
+    date: Date,                     # дата проведения конкурса (в формате YYYY-MM-DD)
+    description: String,            # описание конкурса
+    description_length: Int,        # длина описания (в символах)
     name: String,                   # название конкурса в оригинале
-    name_year: String,              # ? (!= null при sort=contest)
-    non_winner_count: Int,          # ? (!= null при sort=contest)
-    number: Int,                    # ? (!= null при sort=contest)
-    place: String,                  # место проведения (!= null при sort=contest)
-    short_description: String       # краткое описание (!= null при sort=contest)
+    name_year: String,              # ?
+    non_winner_count: Int,          # ?
+    number: Int,                    # ?
+    place: String,                  # место проведения
+    short_description: String       # краткое описание
 }
 ```
