@@ -241,3 +241,39 @@ onlymatches - выдавать только содержимое массива 
     ...
 ]
 ```
+
+## Поиск фильмов
+Запрос
+```
+/GET /search-films?q={query}&page={page}&onlymatches={0|1}
+```
+Параметры
+```
+query - строка поиска. В качестве разделителя используется "+"
+page - номер страницы (необязательный; по-умолчанию 1)
+onlymatches - выдавать только содержимое массива matches (необязательный; по-умолчанию 0)
+```
+Пример
+```
+/GET /search-films?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+```
+Ответ (при запросе с параметром **onlymatches=1**)
+```
+[
+    {
+        actors: String,          # список актеров
+        country: String,         # список стран производства
+        description: String,     # описание
+        director: String,        # список режиссеров
+        doc: Int,                # ?
+        film_id: Int,            # id фильма
+        name: String,            # оригинальное название
+        rusname: String,         # русскоязычное название
+        screenwriter: String,    # список сценаристов
+        tagline: String,         # слоган
+        weight: Int,             # степень релевантности
+        year: Int                # год
+    },
+    ...
+]
+```
