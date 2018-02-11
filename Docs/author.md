@@ -337,7 +337,7 @@ GET /autor/133/responses?page=2&sort=rating - 50-100 отзывы (по убыв
 [
     {
         name: String,             # название произведения в оригинале
-        posted_date: Date,        # дата публикации (в формате YYYY-MM-DD HH:mm:SS)
+        posted_date: DateTime,    # дата публикации
         response_id: Int,         # id отзыва
         response_text: String,    # текст отзыва
         rusname: String,          # русскоязычное называние произведения
