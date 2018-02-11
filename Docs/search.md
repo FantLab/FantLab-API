@@ -36,7 +36,7 @@
 ## Поиск авторов
 Запрос
 ```
-/GET /search-autors?q={query}&page={page}&onlymatches={0|1}
+GET /search-autors?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -46,7 +46,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-autors?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+GET /search-autors?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -59,7 +59,7 @@ onlymatches - выдавать только содержимое массива 
         deathyear: Int,          # год смерти
         doc: Int,                # ?
         editioncount: Int,       # количество изданий
-        is_opened: Int,          # открыта ли страница автора (1 - да, 0 - нет)
+        is_opened: Boolean,      # открыта ли страница автора
         markcount: Int,          # количество оценок
         midmark: Int,            # средняя оценка автора * 100
         moviecount: Int,         # количество фильмов (экранизаций и т.д.)
@@ -75,7 +75,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск произведений
 Запрос
 ```
-/GET /search-works?q={query}&page={page}&onlymatches={0|1}
+GET /search-works?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -85,7 +85,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-works?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+GET /search-works?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -138,7 +138,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск изданий
 Запрос
 ```
-/GET /search-editions?q={query}&page={page}&onlymatches={0|1}
+GET /search-editions?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -148,7 +148,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-editions?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+GET /search-editions?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -176,7 +176,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск книжных серий
 Запрос
 ```
-/GET /search-series?q={query}&page={page}&onlymatches={0|1}
+GET /search-series?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -186,7 +186,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-series?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+GET /search-series?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -215,7 +215,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск премий
 Запрос
 ```
-/GET /search-awards?q={query}&page={page}&onlymatches={0|1}
+GET /search-awards?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -225,7 +225,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-awards?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
+GET /search-awards?q=Asimov&page=1&onlymatches=1 - поиск по фразе "Asimov"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -251,7 +251,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск персон
 Запрос
 ```
-/GET /search-persons?q={query}&page={page}&onlymatches={0|1}
+GET /search-persons?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -261,7 +261,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-persons?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+GET /search-persons?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -285,7 +285,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск издательств
 Запрос
 ```
-/GET /search-publishers?q={query}&page={page}&onlymatches={0|1}
+GET /search-publishers?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -295,7 +295,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-publishers?q=Москва&page=1&onlymatches=1 - поиск по фразе "Москва"
+GET /search-publishers?q=Москва&page=1&onlymatches=1 - поиск по фразе "Москва"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -321,7 +321,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск фильмов
 Запрос
 ```
-/GET /search-films?q={query}&page={page}&onlymatches={0|1}
+GET /search-films?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -331,7 +331,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-films?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+GET /search-films?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -356,7 +356,7 @@ onlymatches - выдавать только содержимое массива 
 ## Поиск статей
 Запрос
 ```
-/GET /search-articles?q={query}&page={page}&onlymatches={0|1}
+GET /search-articles?q={query}&page={page}&onlymatches={0|1}
 ```
 Параметры
 ```
@@ -366,7 +366,7 @@ onlymatches - выдавать только содержимое массива 
 ```
 Пример
 ```
-/GET /search-articles?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
+GET /search-articles?q=Лавкрафт&page=1&onlymatches=1 - поиск по фразе "Лавкрафт"
 ```
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -388,7 +388,7 @@ onlymatches - выдавать только содержимое массива 
 ## Общий поиск
 Запрос
 ```
-/GET /searchmain?q={query}
+GET /searchmain?q={query}
 ```
 Параметры
 ```
@@ -396,7 +396,7 @@ query - строка поиска. В качестве разделителя и
 ```
 Пример
 ```
-/GET /searchmain?q=Лавкрафт - поиск по фразе "Лавкрафт"
+GET /searchmain?q=Лавкрафт - поиск по фразе "Лавкрафт"
 ```
 Ответ (см. [общая структура ответа](#Общая-структура-ответа) и наборы полей для отдельных запросов)
 ```
