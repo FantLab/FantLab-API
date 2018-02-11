@@ -95,22 +95,22 @@ GET /search-works?q=Asimov&page=1&onlymatches=1 - поиск по фразе "As
         all_autor_rusname: String,     # список всех авторов на русском языке (без bb-тегов)
         altname: String,               # ?
         autor1_id: Int,                # id 1-го автора
-        autor1_is_opened: Int,         # открыта ли страница 1-го автора
+        autor1_is_opened: Boolean,     # открыта ли страница 1-го автора
         autor1_rusname: String,        # русскоязычное имя 1-го автора
         autor2_id: Int,                # id 2-го автора
-        autor2_is_opened: Int,         # открыта ли страница 2-го автора
+        autor2_is_opened: Boolean,     # открыта ли страница 2-го автора
         autor2_rusname: String,        # русскоязычное имя 2-го автора
         autor3_id: Int,                # id 3-го автора
-        autor3_is_opened: Int,         # открыта ли страница 3-го автора
+        autor3_is_opened: Boolean,     # открыта ли страница 3-го автора
         autor3_rusname: String,        # русскоязычное имя 3-го автора
         autor4_id: Int,                # id 4-го автора
-        autor4_is_opened: Int,         # открыта ли страница 4-го автора
+        autor4_is_opened: Boolean,     # открыта ли страница 4-го автора
         autor4_rusname: String,        # русскоязычное имя 4-го автора
         autor5_id: Int,                # id 5-го автора
-        autor5_is_opened: Int,         # открыта ли страница 5-го автора
+        autor5_is_opened: Boolean,     # открыта ли страница 5-го автора
         autor5_rusname: String,        # русскоязычное имя 5-го автора
         autor_id: Int,                 # ?
-        autor_is_opened: Int,          # ?
+        autor_is_opened: Boolean,      # ?
         autor_rusname: String,         # ?
         doc: Int,                      # ?
         fullname: String,              # полное название произведения (русскоязычное + оригинальное)
@@ -231,7 +231,7 @@ GET /search-awards?q=Asimov&page=1&onlymatches=1 - поиск по фразе "A
 ```
 [
     {
-        awards_id: Int,            # id премии
+        award_id: Int,            # id премии
         country: String,           # страна вручения
         country_id: Int,           # id страны вручения
         description: String,       # описание
