@@ -220,21 +220,19 @@ page = номер страницы*
 [
     {
         response_id: Int,                            # id отзыва
-        posted_date: DateTime,                       # дата время написания отзыва
+        response_date: DateTime,                     # дата-время написания отзыва
         response_text: String,                       # текст отзыва
+        response_votes: int,                         # рейтинг отзыва
+        mark: Int,                                   # оценка произведению, данная вместе с отзывом (1-10)
 
         work_id: Int,                                # id произведения
-        work_type_id: Int,
-        rusname: String,                             # название произведения на русском
-        name: String,                                # оригинальное название произведения
+        work_name: String,                           # название произведения на русском
+        work_name_orig: String,                      # оригинальное название произведения
+        work_type_id: Int,                           # id типа произведения
 
         user_id: Int,
         user_name: String,                           # login
-        user_sex: Int,                               # мол: 1- мужской, 0-женский
-        user_voted: null,                            # ?
-
-        vote_plus: "69",                             # выставлено плюсов за отзыв
-        vote_minus: "-3",                            # выставлено минусов за отзыв
+        user_sex: Int,                               # мол: m- мужской, w-женский
     },
     ...
 ]
