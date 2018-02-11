@@ -56,3 +56,4 @@
 3. Поиск по блогам (e.g. https://api.fantlab.ru/search-blog.json?q=David&blogs=0&t=t&alg=0&period=0&sortby=rel)
 4. Поиск по форуму (e.g. https://api.fantlab.ru/search-forum.json?q=David&t=t&forums=0&alg=0&period=0&sortby=rel)
 5. Краткий поиск (e.g. https://api.fantlab.ru/search.json?pretty=1&w=1,2,3&e=111,112&a=1,2)
+6. OAuth-авторизация
