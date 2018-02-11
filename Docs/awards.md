@@ -161,7 +161,7 @@ GET /contest/7955?include_works=1 - Хьюго 2017г. с номинантами
         },
         ...
     ],
-    date: Date,                     # дата проведения конкурса (в формате YYYY-MM-DD)
+    date: Date,                     # дата проведения конкурса
     description: String,            # описание конкурса
     description_length: Int,        # длина описания (в символах)
     name: String,                   # название конкурса в оригинале
