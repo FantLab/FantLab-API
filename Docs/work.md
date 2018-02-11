@@ -53,10 +53,10 @@ GET /work/{id}
     public_download_file: Int,         # есть файл для скачивания/чтения (1 - "доступно для свободного чтения")
 
     rating: {
-        rating: Double,                # рейтинг
+        rating: Float,                 # рейтинг (до сотых, пр.: "8.91")
         voters: Int,                   # кол-во оценок
     },
-    val_midmark_by_weight: Double,     # рейтинг (дубль)
+    val_midmark_by_weight: Float,      # рейтинг (дубль)
     val_voters: Int,                   # кол-во оценок (дубль)
     val_responsecount: Int,            # кол-во отзывов на произведение
 
