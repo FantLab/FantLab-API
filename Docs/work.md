@@ -213,7 +213,8 @@ page = номер страницы*
 
 Пример:
 > [/work/1/responses](https://api.fantlab.ru/work/1/responses) - хорошие отызывы на "Гиперион" Дэна Симменса  
-> [/work/1/responses?sort=date](https://api.fantlab.ru/work/1/responses?sort=date) - смежие отзывы на "Гиперион" Дэна Симменса
+> [/work/1/responses?sort=date](https://api.fantlab.ru/work/1/responses?sort=date) - новые отзывы на "Гиперион" Дэна Симменса
+
 Ответ:
 ```
 [
