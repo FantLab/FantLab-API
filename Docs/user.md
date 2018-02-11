@@ -65,5 +65,5 @@ id - id пользователя
 
 
 ## Список отзывов
-см. [Docs/responses.md#Отзывы посетителяа](../Docs/responses.md#Отзывы-посетителя)
+см. [Docs/responses.md#Отзывы посетителя](../Docs/responses.md#Отзывы-посетителя)
 
