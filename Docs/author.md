@@ -464,24 +464,3 @@ GET /autor/133/awards?sort=bywork - награды Дж. Р.Р. Мартина, 
 **Nota bene**
 
 список отдается без разбиения по категориям
-## Подписка на оповещения о новых произведениях или изданиях
-Запрос
-```
-GET https://fantlab.ru/notification/subscribe/autors/{id}/{works|editions}.json
-```
-Параметры
-```
-id - id автора
-cookie - авторизационный хэдер (fl_s=*)
-```
-Пример
-```
-GET https://fantlab.ru/notification/subscribe/autors/133/works.json - подписка на оповещения о новых произведениях Дж. Р.Р. Мартина
-```
-Ответ
-```
-{
-    id: Int,            # id подписки
-    status: Boolean     # успешно ли выполнена операция
-}
-```
