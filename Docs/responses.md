@@ -24,7 +24,7 @@ sort - вариант сортировки (необязательный; по-�
 ```
 
 Пример
-> GET [/autor/133/responses?page=2&sort=rating](https://api.fantlab.ru/autor/133/responses?sort=rating) - 50 хороших отзывы на произведения Дж. Р.Р. Мартина
+> [/autor/133/responses?page=2&sort=rating](https://api.fantlab.ru/autor/133/responses?sort=rating) - 50 хороших отзывы на произведения Дж. Р.Р. Мартина
 
 Ответ:
 ```
@@ -94,7 +94,7 @@ sort - вариант сортировки (необязательный; по-�
 ```
 
 Пример
-> GET [/user/1/responses?page=2&sort=rating](https://api.fantlab.ru/user/1/responses?page=2&sort=rating) - 50-100 отзывы (по убыванию рейтинга) creator'а
+> [/user/1/responses?page=2&sort=rating](https://api.fantlab.ru/user/1/responses?page=2&sort=rating) - 50-100 отзывы (по убыванию рейтинга) creator'а
 
 Ответ
 ```
