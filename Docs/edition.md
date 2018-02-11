@@ -6,8 +6,8 @@ GET /edition/{id}?content={0|1}&images_plus={0|1}
 ```
 Параметры
 ```
-id - id издания,
-content - выводить ли содержание издания (необязательный; по-умолчанию 0),
+id - id издания
+content - выводить ли содержание издания (необязательный; по-умолчанию 0)
 images_plus - выводить ли доп. изображения (необязательный; по-умолчанию 0)
 ```
 Пример
@@ -32,7 +32,7 @@ GET /edition/{id}/extended
         authors: [ |null                # авторы
             {
                 id: Int,                # id автора
-                is_opened: Int,         # открыта ли страница автора (1 - да, 0 - нет)
+                is_opened: Boolean,     # открыта ли страница автора
                 name: String,           # имя автора
                 type: String            # тип автора (autor - автор, art - художник)
             },
@@ -97,20 +97,20 @@ GET /edition/{id}/extended
         ...: String|null,
         ...
     ],
-    lang: String,            # язык издания
-    lang_code: String,       # код языка издания
-    last_modified: Date,     # дата последнего редактирования (в формате YYYY-MM-DD HH:mm:SS)
-    notes: String,           # примечания
-    pages: Int,              # количество страниц
-    plan_date: ?,            # ?
-    plan_description: ?,     # ?
-    preread: Int,            # есть ли отрывок для чтения (1 - да, 0 - нет)
-    series: [                # серии, в которые входит издание
+    lang: String,              # язык издания
+    lang_code: String,         # код языка издания
+    last_modified: DateTime,   # дата последнего редактирования
+    notes: String,             # примечания
+    pages: Int,                # количество страниц
+    plan_date: ?,              # ?
+    plan_description: ?,       # ?
+    preread: Boolean,          # есть ли отрывок для чтения
+    series: [                  # серии, в которые входит издание
         { |null
-            id: Int,             # id серии
-            is_opened: Int,      # открыта ли страница серии (1 - да, 0 - нет)
-            name: String,        # название серии
-            type: String         # тип (series) 
+            id: Int,              # id серии
+            is_opened: Boolean,   # открыта ли страница серии
+            name: String,         # название серии
+            type: String          # тип (series) 
         },
         ...
     ],
@@ -128,6 +128,7 @@ GET /edition/{id}/extended
 ```
 edition_id - id издания
 bookcase_id - id книжной полки
+change - добавить (true) или удалить (false)
 cookie - авторизационный хэдер (fl_s=*)
 ```
 Пример
@@ -138,6 +139,10 @@ cookie - авторизационный хэдер (fl_s=*)
 ```
 HTML-разметка страницы издания
 ```
-*TODO:* отдельный endpoint для работы с книжными полками?
+**TODO:**
 
-**Nota bene:** узнать, на каких полках есть произведение, пока невозможно
+отдельный endpoint для работы с книжными полками?
+
+**Nota bene:**
+
+узнать, на каких полках есть произведение, пока невозможно
