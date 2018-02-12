@@ -51,7 +51,7 @@ id - id пользователя
    bookcase_count: Int,               # заведено книжных поток
 
    curator_autors: Int,               # кол-во курируемых позиций на сайте
-   ticket_count: Int,                 # написано тикитов в базу сайта
+   tickets_count: Int,                # написано тикитов в базу сайта
 
    autor_id: Int,                     # id автора в базе FL, если юзер является автором
    autor_name: String,                # имя
