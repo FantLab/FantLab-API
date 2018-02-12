@@ -1,16 +1,19 @@
 # Пользователь
 
 ## Основная информация
+
 Запрос
 ```
 GET /user/{id}
 ```
+
 Параметры
 ```
 id - id пользователя
 ```
+
 Пример
-> GET [/user/1](https://api.fantlab.ru/user/1) - юзеринфо creator'а
+> [/user/1](https://api.fantlab.ru/user/1) - юзеринфо creator'а
 
 Ответ
 ```
