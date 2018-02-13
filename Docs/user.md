@@ -56,11 +56,11 @@ id - id пользователя
    autor_id: Int,                     # id автора в базе FL, если юзер является автором
    autor_name: String,                # имя
    autor_name_orig: String,           # имя англ.
-   autor_is_opened: Int,              # открыт ли этот автор на фл (0 - нет / 1 - да)
+   autor_is_opened: Boolean,          # открыт ли этот автор на фл (0 - нет / 1 - да)
 
    blog_id: Int,                      # id авторской колонки юзера (если есть)
 
-   block: Int,                        # юзер в бане (0 - нет / 1 - да)     
+   block: Boolean,                    # юзер в бане (0 - нет / 1 - да)     
    date_of_block: DateTime,           # дата начало бана
    date_of_block_end: DateTime,       # дата окончание бана (если null - бан вечный)
 }
