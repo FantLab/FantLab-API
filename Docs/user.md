@@ -83,6 +83,6 @@ GET /userlogin/{login}
 Ответ
 ```
 {
-user_id: "1"
+    user_id: Int
 }
 ```
