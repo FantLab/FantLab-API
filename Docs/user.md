@@ -70,3 +70,19 @@ id - id пользователя
 ## Список отзывов
 см. [Docs/responses.md#Отзывы посетителя](../Docs/responses.md#Отзывы-посетителя)
 
+
+## Узнать id по login
+Запрос
+```
+GET /userlogin/{login}
+```
+
+Пример
+> [/userlogin/creator](https://api.fantlab.ru/userlogin/creator) - id юзера "creator"
+
+Ответ
+```
+{
+user_id: "1"
+}
+```
