@@ -72,10 +72,10 @@ id - id пользователя
 
 
 ## Узнать id по login
+
 Запрос
 ```
 GET /userlogin?usersearch={login}
-https://api.fantlab.ru/userlogin?usersearch=%D0%A0.%D0%91%D1%83%D0%BA%D0%B0%D1%88%D0%BA%D0%B0
 ```
 
 Пример
