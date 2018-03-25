@@ -5,14 +5,14 @@
 
 Запрос
 ```
-GET /search-ids.json?a=1,2&w=1,2&e=1,2
+GET /search-ids.json?a={autor_ids}&w={work_ids}&e={edition_ids}
 ```
 
 Параметры
 ```
-a - список id-авторов
-w - список id-произведений
-e - список id-издания
+autor_ids   - список id-авторов
+work_ids    - список id-произведений
+edition_ids - список id-издания
 ```
 id передаются через запятую. Не более 200 позиций.
 
