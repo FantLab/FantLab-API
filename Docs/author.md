@@ -22,15 +22,15 @@ GET /autorsall
 {
     list:[
         {
+            type: String           # тип сегмента (в данном случае всегда autor)
+            id: Int,               # id автора
+            url: Url               # ссылка на страницу автора
             autor_id: Int,         # id автора
             is_fv: Boolean,        # является ли автор фантастоведом
             name: String,          # имя на русском языке
             name_orig: String,     # имя на языке оригинала
             name_rp: String,       # имя на русском языке в родительном падеже
             name_short: String,    # имя на русском языке для перечислений (сначала фамилия, затем имя)
-            type: String           # тип автора (в данном случае всегда autor)
-            id: Int,               # id автора
-            url: Url               # ссылка на страницу автора
         },
         ...
     ],
@@ -74,6 +74,9 @@ GET /autor/{id}/extended
 Ответ
 ```
 {
+    type: String                      # тип сегмента (в данном случае всегда autor)
+    id: Int,                          # id автора
+    url: Url                          # ссылка на страницу автора
     anons: String,                    # краткий анонс биографии
     autor_id: Int,                    # id автора
     awards: { |null                   # [awards] список наград
