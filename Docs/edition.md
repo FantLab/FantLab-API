@@ -114,7 +114,7 @@ GET /edition/{id}/extended
         },
         ...
     ],
-    type: Int,               # тип издания
+    type: Int,               # id типа издания
     volume: ?,               # ?
     year: Int                # год издания
 }
