@@ -17,7 +17,7 @@ GET /work/{id}
     work_name: String,                # название произведения
     work_name_orig: String,           # оригинальное название (анг или родной)
     work_name_alts: [                 # массив альтернативных названий произведения
-        ...: String,
+        ...: String?,
         ...
     ],
     work_name_bonus: String,          # дополнение к названию
