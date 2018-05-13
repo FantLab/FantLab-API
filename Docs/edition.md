@@ -1,137 +1,110 @@
 # Издание
 
 ## Основная информация
+Запрос
 ```
-GET /edition/{id}
+GET /edition/{id}?content={0|1}&images_plus={0|1}
 ```
-
-Пример:
-> [/edition/1](https://api.fantlab.ru/edition/1) - Дэн Симменс "Гиперион"
-
-
-Ответ:
+Параметры
 ```
-{
-    edition_id: Int,         # id издания
-    edition_name: String,    # название издания
-    image: String,           # ссылка на основную обложку издания
-    image_preview: String,   # ссылка на превью основной обложки
+id - id издания
+content - выводить ли содержание (необязательный; по-умолчанию 0)
+images_plus - выводить ли доп. изображения (необязательный; по-умолчанию 0)
+```
+Пример
+```
+GET /edition/1?content=1&images_plus=1 - "Гиперион" Дэна Симмонса
+```
+Альтернативный запрос для получения всей информации
+```
+GET /edition/{id}/extended
+```
+Ответ
+```
+    content: [ |null          # [content] содержание
+        ...: String,
+        ...
+    ],
+    copies: Int,              # тираж (0, если неизвестен)
+    correct_level: Float,     # степень проверенности издания (0 - не проверено, 0.5 - не полностью проверено, 1 - проверено)
+    cover_type: String,       # тип обложки
     creators: {
-        authors: [ |null                # авторы
+        authors: [ |null               # список авторов
             {
-                id: Int,                # id автора
-                is_opened: Boolean,     # открыта ли страница автора
-                name: String,           # имя автора
-                type: String            # тип автора (autor - автор, art - художник)
-            },
-            ...
+                id: Int,               # id автора
+                is_opened: Boolean,    # открыта ли страница автора
+                name: String,          # имя автора
+                type: String           # тип (autor - автор, art - художник)
+            }
         ],
-        compilers: [ |null              # составители
+        compilers: [ |null             # список составителей (если сборник/антология)
             {
-                id: Int|null,           # id составителя
-                name: String,           # имя составителя (может быть "не указан")
-                type: String|null       # тип (compiler)
-            },
-            ...
+                id: Int|null,          # id составителя
+                name: String,          # имя составителя (может быть "не указан")
+                type: String|null      # тип (compiler)
+            }
         ],
-        publishers: [ |null             # издатели
+        publishers: [ |null            # список издателей
             {
-                id: Int|null,           # id издателя
-                name: String,           # название издателя
-                type: String|null       # тип (publisher)
-            },
-            ...
+                id: Int|null,          # id издателя
+                name: String,          # название издателя
+                type: String|null      # тип (publisher)
+            }
         ]
     },
-    edition_type_id: Int,      # id типа издания
-    edition_type: String,      # тип издания
-    edition_type_plus: [       # доп. типы издания
+    description: String,      # описание
+    edition_id: Int,          # id издания
+    edition_name: String,     # название издания
+    edition_type: String,     # тип издания
+    edition_type_plus: [      # доп. типы издания
         ...: String|null,
         ...
     ],
-    year: Int                  # год издания
-    copies: Int,               # тираж (0, если неизвестен)
-    correct_level: Float,      # степень проверенности издания (0 - не проверено, 0.5 - не полностью проверено, 1 - проверено)
-    cover_type: String,        # тип обложки
-    format: String,            # формат издания
-    format_mm: String,         # формат издания (в мм.)
-    isbns: [                   # все isbn-коды издания
+    format: String,           # формат издания
+    format_mm: String,        # формат издания (в мм.)
+    image: Url,               # основная обложка издания
+    image_preview: Url,       # превью основной обложки
+    images_plus: [ |null                  # [images_plus] доп.обложки и иллюстрации
+        cover: [                          # список обложек
+            {
+                image: Url,               # обложка
+                image_orig: Url,          # обложка в большом разрешеним, если есть
+                image_preview: Url,       # превью обложки
+                image_spine: Url,         # корешок оложки, если он есть
+                pic_text: String          # описание или копирайт изображения
+            }
+        ],
+        plus: [ |null                     # доп. изображения и иллюстрации
+            {
+                image: Url,               # изображение
+                image_preview: Url,       # превью изображения
+                pic_text: String          # описание или копирайт изображения
+            }
+        ]
+    ],
+    isbns: [                   # список ISBN
         ...: String|null,
         ...
     ],
     lang: String,              # язык издания
     lang_code: String,         # код языка издания
-    last_modified: DateTime,   # дата последнего редактирования
+    notes: String,             # примечания
     pages: Int,                # количество страниц
+    plan_date: String,         # план выхода (дата текстом). если поле не пустое - значит издание еще не вышло
+    plan_description: Srting,  # примечание к плану выхода издания
     preread: Boolean,          # есть ли отрывок для чтения
-    series: [                  # серии, в которые входит издание
+    series: [                         # серии, в которые входит издание
         { |null
             id: Int,                  # id серии
-            is_opened: Boolean,       # открыта ли страница серии
+            is_opened: Boolean,       # открыта ли серия
             name: String,             # название серии
-            type: String              # тип (series) 
-        },
-        ...
+            type: String              # тип (series)
+        }
     ],
-    description: String,       # описание
-    notes: String,             # примечания
-
-    plan_date: String,         # план выхода (дата текстом). если поле не пустое - значит издание еще невышедшие
-    plan_description: Srting,  # примечание к плану выхода издания
-
-}
+    year: Int      # год издания
 ```
-
-## Расширенная информация
-```
-GET /edition/{id}/extended
-```
-в расширенной информации о произведении добавляются поля:  
-*content           - выводить ли содержание издания (необязательный; по-умолчанию 0)
-images_plus       - выводить ли доп. изображения (необязательный; по-умолчанию 0)*
-
-Пример:
-> [/edition/35437/extended](https://api.fantlab.ru/edition/35437/extended) - Стивен Кинг "Верткая пуля"
-
-
-Ответ:
-```
-{
-    edition_id: Int,         # id издания
-    ... все поля обычной карточки издания (см. выше) и добаляются новые: ...
-
-    content: [ |null         # содержание
-        ...: String,
-        ...
-    ],
-
-    images_plus: { |null     # изображения в издании - доп.обложки и иллюстрации
-        cover: [             # обложки
-             {           
-                image: Url,                     # обложка
-                image_preview: Url,             # ссылка на превью обложки
-                image_orig: Url,                # обложка в большом разрешеним, если есть
-                image_spine: Url                # корешок оложки, если он есть
-                pic_text: String,               # описание или копирайт изображения
-            },
-            ...
-        ],
-        plus: [ |null        # доп. изображения и иллюстрации
-            {
-                image: Url,                     # картинка
-                image_preview: Url,             # ссылка на превью 
-                pic_text: String,               # описание или копирайт изображения
-            },
-            ...
-        ],
-    },
-```
-
-
-
 --- 
 
 **TODO:**
-
 - доработать оглавление-иерархию в выдаче содержания
 
