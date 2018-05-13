@@ -60,8 +60,8 @@ GET /edition/{id}/extended
         ...: String|null,
         ...
     ],
-    format: String,           # формат издания
-    format_mm: String,        # формат издания (в мм.)
+    format: String,           # формат издания ("0", если неизвестен)
+    format_mm: String?,       # формат издания (в мм.)
     image: Url,               # основная обложка издания
     image_preview: Url,       # превью основной обложки
     images_plus: [ |null                  # [images_plus] доп.обложки и иллюстрации
