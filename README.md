@@ -66,11 +66,3 @@
     * [Отмена подписки](Docs/subscriptions.md#Отмена-подписки)
 12. [Книжные полки](Docs/bookcases.md#Книжные-полки)
     * [Добавление или удаление издания с книжной полки](Docs/bookcases.md#Добавление-или-удаление-издания-с-книжной-полки)
-
-**TODO**
-* Издательства (`/publishers`, `/publisher/{id}`)
-* Поиск по блогам (e.g. https://api.fantlab.ru/search-blog.json?q=David&blogs=0&t=t&alg=0&period=0&sortby=rel)
-* Поиск по форуму (e.g. https://api.fantlab.ru/search-forum.json?q=David&t=t&forums=0&alg=0&period=0&sortby=rel)
-* Краткий поиск (e.g. https://api.fantlab.ru/search.json?pretty=1&w=1,2,3&e=111,112&a=1,2)
-* *OAuth*-авторизация
-* Доописать *work* (выставление оценки и т.д.)
