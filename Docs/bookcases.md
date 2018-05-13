@@ -10,7 +10,7 @@
 
 ---
 
-## Добавление или удаление с книжной полки
+## Добавление или удаление издания с книжной полки
 Запрос
 ```
 /GET /bookcaseclick{edition_id}bc{bookcase_id}change{true|false}
