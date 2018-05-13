@@ -233,7 +233,7 @@ GET /autor/{id}/extended
     name: String,                     # имя на русском языке
     name_orig: String,                # имя в оригинале
     name_pseudonyms: [                # список псевдонимов
-        ...: String,
+        ...: String|null,
         ...
     ],
     name_rp: String,                  # имя на русском языке в родительном падеже
