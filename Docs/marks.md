@@ -55,6 +55,7 @@ type - фильтр по типам произведений
 
         user_work_classif_flag: Boolean,             # признак наличия классификации юзером на это произведение
         user_work_response_flag: Boolean,            # признак наличия отзыва юзера на это произведение
+        user_work_response_id: Int,                  # id отзыва (если он есть)
       },
       ...
     ],
