@@ -28,7 +28,7 @@ httpClientBuilder.setFollowRedirects(false)
 ```kotlin
 FuelManager.instance.apply {
     removeAllResponseInterceptors()
-	  addResponseInterceptor(validatorResponseInterceptor(200..299))
+    addResponseInterceptor(validatorResponseInterceptor(200..299))
 }
 ```
 **TODO**
