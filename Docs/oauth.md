@@ -120,15 +120,15 @@ GET /oauth/get?oauth_token=mWoWHPDhg&client_id=121212&resources=em,rn,nk,sx,av,b
 Ответ
 ```
 {
-    id: Int|null,      # id пользователя
-    em: String|null,   # адрес электронной почты
-    sx: String|null,   # пол
-    rn: String|null,   # настоящее имя
-    nk: String|null,   # логин
-    av: Url|null,      # url аватарки
-    bd: Long|null,     # дата рождения (UNIX-таймштамп)
-    cn: String|null,   # страна
-    ct: String|null    # город
+    id: Int|null,      # [resources += id] id пользователя
+    em: String|null,   # [resources += em] адрес электронной почты
+    sx: String|null,   # [resources += sx] пол
+    rn: String|null,   # [resources += rn] настоящее имя
+    nk: String|null,   # [resources += nk] логин
+    av: Url|null,      # [resources += av] url аватарки
+    bd: Long|null,     # [resources += bd] дата рождения (UNIX-таймштамп)
+    cn: String|null,   # [resources += cn] страна
+    ct: String|null    # [resources += ct] город
 }
 ```
 
