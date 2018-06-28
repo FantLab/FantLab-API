@@ -198,46 +198,6 @@ la_resume         - линговопрофиль произведения*
 
 ```
 
-
-## Список отзывов
-```
-GET /work/{id}/responses
-```
-
-По умолчанию выдается массив из 15 выкооцененных отзывов
-
-*дополнительные параметры (для GET запроса):
-sort = rating (по рейтингу отзыва - по умолчанию), date (по дате написания - новые первые), mark (по оценки - высокие первые)
-page = номер страницы*
-
-
-Пример:
-> [/work/1/responses](https://api.fantlab.ru/work/1/responses) - хорошие отызывы на "Гиперион" Дэна Симменса  
-> [/work/1/responses?sort=date](https://api.fantlab.ru/work/1/responses?sort=date) - новые отзывы на "Гиперион" Дэна Симменса
-
-Ответ:
-```
-[
-    {
-        response_id: Int,                            # id отзыва
-        response_date: DateTime,                     # дата-время написания отзыва
-        response_text: String,                       # текст отзыва
-        response_votes: int,                         # рейтинг отзыва
-        mark: Int,                                   # оценка произведению, данная вместе с отзывом (1-10)
-
-        work_id: Int,                                # id произведения
-        work_name: String,                           # название произведения на русском
-        work_name_orig: String,                      # оригинальное название произведения
-        work_type_id: Int,                           # id типа произведения
-
-        user_id: Int,
-        user_name: String,                           # login
-        user_sex: Int,                               # мол: m- мужской, w-женский
-    },
-    ...
-]
-```
-
 ## Выставление/удаление оценки
 Запрос
 ```
