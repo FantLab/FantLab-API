@@ -41,7 +41,7 @@ GET https://fantlab.ru/notification/subscribe/translators/1/editions.json - по
     status: Boolean    # успешно ли выполнена операция
 }
 ```
-## Отмена подписки
+## Отмена подписки на оповещения
 Запрос
 ```
 GET https://fantlab.ru/notification/unsubscribe/{id}.json
