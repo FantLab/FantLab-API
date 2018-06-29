@@ -106,6 +106,26 @@ offset - смещение от начала
 }
 ```
 
+## Создание книжной полки
+Запрос
+```
+/GET https://fantlab.ru/bookcasecreate{work|edition|film}?name={name}&type={work|edition|film}&shared={on|off}
+```
+Параметры
+```
+name - название полки
+shared - открытая полка (on) или нет (off)
+cookie - авторизационный хэдер (fl_s=*)
+```
+Пример
+```
+/GET https://fantlab.ru/bookcasecreateedition?name=Избранное&type=edition&shared=on - создать открытую полку "Избранное" для изданий
+```
+Ответ
+```
+id новосозданной книжной полки
+```
+
 ## Добавление или удаление произведения с книжной полки
 Запрос
 ```
