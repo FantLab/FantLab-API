@@ -53,9 +53,8 @@ type - фильтр по типам произведений
         user_sex: Int,                               # пол: m - мужской, w - женский
         user_avatar: Url,                            # аватарка пользователя
 
+        user_work_response_id: Int,                  # id отзыва юзера на это произведение (если отзыв написан)
         user_work_classif_flag: Boolean,             # признак наличия классификации юзером на это произведение
-        user_work_response_flag: Boolean,            # признак наличия отзыва юзера на это произведение
-        user_work_response_id: Int,                  # id отзыва (если он есть)
       },
       ...
     ],
