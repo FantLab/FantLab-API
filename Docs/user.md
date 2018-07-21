@@ -87,3 +87,5 @@ GET /userlogin?usersearch={login}
     user_id: Int
 }
 ```
+
+Примечание: при отсутствии такого логина вернется `user_id: 0`
