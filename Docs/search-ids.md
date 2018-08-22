@@ -5,7 +5,7 @@
 
 Запрос
 ```
-GET /search-ids.json?a={autor_ids}&w={work_ids}&e={edition_ids}
+GET /search-ids?a={autor_ids}&w={work_ids}&e={edition_ids}
 ```
 
 Параметры
