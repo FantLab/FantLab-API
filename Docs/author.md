@@ -1,4 +1,4 @@
-# Автор
+# Авторы
 
 ## Список авторов
 Запрос
@@ -43,42 +43,106 @@ GET /autorsall
 1. В списке только открытые авторы, параметра для получения списка всех авторов нет
 
 
+# Автор
+
 ## Основная информация
-Запрос
 ```
-GET /autor/{id}?biography={0|1}&awards={0|1}&la_resume={0|1}&biblio_blocks={0|1}&sort={year|rating|markcount|rusname|name|writeyear}
+GET /autor/{id}
 ```
-Параметры
-```
-id - id автора
-biography - выводить ли блок биографии (необязательный; по-умолчанию 0)
-awards - выводить ли блок наград (необязательный; по-умолчанию 0)
-la_resume - выводить ли блок лингвоанализа (необязательный; по-умолчанию 0)
-biblio_blocks - выводить ли блоки циклов и отдельных произведений (необязательный; по-умолчанию 0)
-sort - вариант сортировки библиографии (необязательный; по-умолчанию year)
-    * year - по году публикации
-    * rating - по рейтингу
-    * markcount - по количеству оценок
-    * rusname - по русскому названию
-    * name - по оригинальному названию
-    * writeyear - по году написания
-```
-Пример
-```
-GET /autor/133?biography=1&awards=1&la_resume=1&biblio_blocks=1&sort=rating - Джордж Р.Р. Мартин
-```
-Альтернативный запрос для получения всей информации
-```
-GET /autor/{id}/extended
-```
-Ответ
+
+Пример:
+> [/autor/1](https://api.fantlab.ru/autor/1) - Дэн Симменс
+
+
+Ответ:
 ```
 {
     type: String                      # тип сегмента (в данном случае всегда autor)
     id: Int,                          # id автора
+    autor_id: Int,                    # id автора (дубль, название переменной с типом)
     url: Url                          # ссылка на страницу автора
+    last_modified: DateTime,          # дата последнего редактирования
+
+    is_opened: Boolean,               # открыта ли страница автора
     anons: String,                    # краткий анонс биографии
-    autor_id: Int,                    # id автора
+    birthday: Date|null,              # дата рождения
+    country_id: Int|null,             # id страны
+    country_name: String,             # название страны
+    deathday: Date|null,              # дата смерти
+    fantastic: Int,                   # ?
+    image: String,                    # ссылка на основное фото автора
+    image_preview: String,            # ссылка на превью основного фото автора
+    name: String,                     # имя на русском языке
+    name_orig: String,                # имя в оригинале
+    name_pseudonyms: [                # список псевдонимов
+        ...: String|null,
+        ...
+    ],
+    name_rp: String,                  # имя на русском языке в родительном падеже
+    name_short: String,               # имя на русском языке для перечислений (сначала фамилия, затем имя)
+    sex: String,                      # пол ("m" - мужской, "f" - женский)
+    stat: {                           # статистика
+        awardcount: Int|null,         # [any] количество наград
+        editioncount: Int,            # количество изданий
+        markcount: Int,               # количество поставленных автору оценок
+        moviecount: Int,              # количество фильмов (экранизаций и т.д.)
+        responsecount: Int,           # количество написанных на произведения автора отзывов
+        workcount: Int|null           # [any] количество произведений
+    },
+    sites: [ |null                    # [any] сайты автора
+        {
+            descr: String,            # описание ссылки
+            site: String              # ссылка
+        },
+        ...
+    ],
+}
+```
+
+## Расширенная информация
+```
+GET /autor/{id}/extended
+```
+в расширенной информации о произведении добавляются блоки:  
+*biography - биография
+awards - наград
+la_resume - лингвоанализ
+biblio_blocks - библиография (список произведений)
+sort - вариант сортировки библиографии (необязательный)
+    year - по году публикации
+    rating - по рейтингу
+    markcount - по количеству оценок
+    rusname - по русскому названию
+    name - по оригинальному названию
+    writeyear - по году написания*
+
+Пример:
+> [/autor/1/extended](https://api.fantlab.ru/autor/1/extended) - Дэн Симменс
+
+*Есть поддержка запроса с получением частичных данных - указанием параметров и сортировки:
+> /autor/1?biography=1&awards=1&la_resume=1&biblio_blocks=1&sort=rating*
+
+Ответ
+```
+{
+    id: Int,                    # id автора
+    ... все поля обычной карточки автора (см. выше) и добаляются новые: ...
+
+    biography: String|null,           # [biography] биография
+    biography_notes: String|null,     # [any] примечания к биографии
+    source: String|null,              # [any] описание источника биографии
+    source_link: String|null,         # [any] ссылка на источник биографии
+
+    compiler: String|null,            # [any] составитель библиографии
+    curator: Int|null,                # id куратора библиографии
+
+    la_resume: [ |null                # [la_resume] лингвоанализ
+        ...: String,                  # отдельный пункт анализа
+        ...
+    ],
+    registered_user_id: Int|null,         # id автора как пользователя Fantlab'а (если зарегистрирован)
+    registered_user_login: String|null,   # логин автора как пользователя Fantlab'а,
+
     awards: { |null                   # [awards] список наград
         nom: [
             {
@@ -112,14 +176,7 @@ GET /autor/{id}/extended
             ...
         ]
     },
-    biography: String|null,           # [biography] биография
-    biography_notes: String|null,     # [any] примечания к биографии
-    birthday: Date|null,              # дата рождения
-    compiler: String|null,            # [any] составитель библиографии
-    country_id: Int|null,             # id страны
-    country_name: String,             # название страны
-    curator: Int|null,                # id куратора библиографии
-    cycles: ?|null,                   # ?
+
     cycles_blocks: { |null            # [biblio_blocks] блок циклов
         {block_id}: {                 # id блока (см. константы)
             id: Int,                  # id блока (совпадает с block_id)
@@ -219,47 +276,6 @@ GET /autor/{id}/extended
         },
         ...
     },
-    deathday: Date|null,              # дата смерти
-    fantastic: Int,                   # ?
-    fl_blog_anons: String|null,       # ?
-    image: String,                    # ссылка на основное фото автора
-    image_preview: String,            # ссылка на превью основного фото автора
-    is_opened: Boolean,               # открыта ли страница автора
-    la_resume: [ |null                # [la_resume] лингвоанализ
-        ...: String,                  # отдельный пункт анализа
-        ...
-    ],
-    last_modified: DateTime,          # дата последнего редактирования
-    name: String,                     # имя на русском языке
-    name_orig: String,                # имя в оригинале
-    name_pseudonyms: [                # список псевдонимов
-        ...: String|null,
-        ...
-    ],
-    name_rp: String,                  # имя на русском языке в родительном падеже
-    name_short: String,               # имя на русском языке для перечислений (сначала фамилия, затем имя)
-    registered_user_id: Int|null,         # id автора как пользователя Fantlab'а (если зарегистрирован)
-    registered_user_login: String|null,   # логин автора как пользователя Fantlab'а,
-    registered_user_sex: String|null,     # пол автора как пользователя Fantlab'а ("m" - мужской, "f" - женский)
-    sex: String,                      # пол ("m" - мужской, "f" - женский)
-    sites: [ |null                    # [any] сайты автора
-        {
-            descr: String,            # описание ссылки
-            site: String              # ссылка
-        },
-        ...
-    ],
-    source: String|null,              # [any] описание источника биографии
-    source_link: String|null,         # [any] ссылка на источник биографии
-    stat: {                           # статистика
-        awardcount: Int|null,         # [any] количество наград
-        editioncount: Int,            # количество изданий
-        markcount: Int,               # количество поставленных автору оценок
-        moviecount: Int,              # количество фильмов (экранизаций и т.д.)
-        responsecount: Int,           # количество написанных на произведения автора отзывов
-        workcount: Int|null           # [any] количество произведений
-    },
-    works: ?|null,                    # ?
     works_blocks: { |null             # [biblio_blocks] блок отдельных произведений
         {block_id}: {                 # id блока (см. константы)
             id: Int,                  # id блока (совпадает с block_id)
