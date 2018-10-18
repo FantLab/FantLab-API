@@ -83,7 +83,7 @@ GET /edition/{id}/extended
 images_plus - доп. изображения*
 
 Пример:
-> [/edition/1/extended](https://api.fantlab.ru/edition/1/extended) - Дэн Симменс "Гиперион"
+> [/edition/1/extended](https://api.fantlab.ru/edition/1/extended) - Дэн Симменс "Гиперион"  
 > [/edition/1?content=1&images_plus=1](https://api.fantlab.ru/edition/1?content=1&images_plus=1) - Альтернативный запрос с перечислением позиций
 
 
