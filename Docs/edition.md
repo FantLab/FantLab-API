@@ -3,26 +3,19 @@
 ## Основная информация
 Запрос
 ```
-GET /edition/{id}?content={0|1}&images_plus={0|1}
+GET /edition/{id}
 ```
-Параметры
-```
-id - id издания
-content - выводить ли содержание (необязательный; по-умолчанию 0)
-images_plus - выводить ли доп. изображения (необязательный; по-умолчанию 0)
-```
-Пример
-```
-GET /edition/1?content=1&images_plus=1 - "Гиперион" Дэна Симмонса
-```
-Альтернативный запрос для получения всей информации
-```
-GET /edition/{id}/extended
-```
+Пример:
+> [/edition/1](https://api.fantlab.ru/edition/1) - Дэн Симменс "Гиперион"
+
+
 Ответ
 ```
-    content: [ |null          # [content] содержание
-        ...: String,
+    edition_id: Int,          # id издания
+    edition_name: String,     # название издания
+    edition_type: String,     # тип издания
+    edition_type_plus: [      # доп. типы издания
+        ...: String|null,
         ...
     ],
     copies: Int,              # тираж (0, если неизвестен)
@@ -53,35 +46,10 @@ GET /edition/{id}/extended
         ]
     },
     description: String,      # описание
-    edition_id: Int,          # id издания
-    edition_name: String,     # название издания
-    edition_type: String,     # тип издания
-    edition_type_plus: [      # доп. типы издания
-        ...: String|null,
-        ...
-    ],
     format: String,           # формат издания ("0", если неизвестен)
     format_mm: String?,       # формат издания (в мм.)
     image: Url,               # основная обложка издания
     image_preview: Url,       # превью основной обложки
-    images_plus: [ |null                  # [images_plus] доп.обложки и иллюстрации
-        cover: [                          # список обложек
-            {
-                image: Url,               # обложка
-                image_orig: Url,          # обложка в большом разрешеним, если есть
-                image_preview: Url,       # превью обложки
-                image_spine: Url,         # корешок оложки, если он есть
-                pic_text: String          # описание или копирайт изображения
-            }
-        ],
-        plus: [ |null                     # доп. изображения и иллюстрации
-            {
-                image: Url,               # изображение
-                image_preview: Url,       # превью изображения
-                pic_text: String          # описание или копирайт изображения
-            }
-        ]
-    ],
     isbns: [                   # список ISBN
         ...: String|null,
         ...
@@ -103,8 +71,48 @@ GET /edition/{id}/extended
     ],
     year: Int      # год издания
 ```
---- 
 
-**TODO:**
-- доработать оглавление-иерархию в выдаче содержания
+
+## Расширенная информация (включает содержание)
+Запрос
+```
+GET /edition/{id}/extended
+```
+в расширенной информации о произведении добавляются поля:  
+*content - содержание в виде массива строк (кол-во пробелов в начале строки - уровень вложения)
+images_plus - доп. изображения*
+
+Пример:
+> [/edition/1/extended](https://api.fantlab.ru/edition/1/extended) - Дэн Симменс "Гиперион"
+> [/edition/1?content=1&images_plus=1](https://api.fantlab.ru/edition/1?content=1&images_plus=1) - Альтернативный запрос с перечислением позиций
+
+
+Ответ
+```
+    edition_id: Int,          # id издания
+    ... все поля обычной карточки издания (см. выше) и добаляются новые: ...
+
+    content: [ |null          # [content] содержание
+        ...: String,
+        ...
+    ],
+    images_plus: [ |null                  # [images_plus] доп.обложки и иллюстрации
+        cover: [                          # список обложек
+            {
+                image: Url,               # обложка
+                image_orig: Url,          # обложка в большом разрешеним, если есть
+                image_preview: Url,       # превью обложки
+                image_spine: Url,         # корешок оложки, если он есть
+                pic_text: String          # описание или копирайт изображения
+            }
+        ],
+        plus: [ |null                     # доп. изображения и иллюстрации
+            {
+                image: Url,               # изображение
+                image_preview: Url,       # превью изображения
+                pic_text: String          # описание или копирайт изображения
+            }
+        ]
+    ],
+```
 
