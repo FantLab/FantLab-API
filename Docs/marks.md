@@ -121,8 +121,8 @@ mini - режим мини-данных: выводятся только work_id
         work_id: Int,                                # id произведения
         work_type_id: Int,                           # id типа произведения
         user_id: Int,                                # id пользователя
-        user_work_response_id: Int,                  # id отзыва (если он есть)
-        user_work_classif_flag: Boolean,             # признак наличия классификации юзером на это произведение
+        user_work_response_id: Int,                  # id отзыва юзера (если он есть)
+        user_work_classif_flag: Boolean,             # проклассификацировано или нет юзером
       },
       ...
     ],
