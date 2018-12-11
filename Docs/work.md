@@ -207,46 +207,27 @@ la_resume         - линговопрофиль произведения*
 ## Похожие произведения
 Запрос
 ```
-GET /work{id}/analogs
+GET /work{id}/similars
 ```
 
 Пример:
-> [/work/1/analogs](https://api.fantlab.ru/work/1/analogs) - похожие проивезедения на Дэн Симменс "Гиперион"
-
-TODO: привести вывод к стандарту "соглашения о наименовании"
+> [/work/1/similars](https://api.fantlab.ru/work/1/similars) - похожие проивезедения на Дэн Симменс "Гиперион"
 
 Ответ
+
 ```
 {   
     [
-    altname: "",
-    analog_pair_id: "101",
-    autor1_id: "146",
-    autor1_name: "Frank Herbert",
-    autor1_rusname: "Фрэнк Герберт",
-    autor2_name: null,
-    autor2_rusname: null,
-    autor3_name: null,
-    autor3_rusname: null,
-    autor4_name: null,
-    autor4_rusname: null,
-    autor5_rusname: null,
-    mark_id: null,
-    markcount: "44",
-    name: "Dune",
-    name_show_im: "роман",
-    response_mark: "3464",
-    responses_count: "274",
-    rusname: "Дюна",
-    work_id: "4325",
-    work_mark: "9",
-    work_markcount: "6619",
-    work_marks_sum: "57844",
-    year: "1965"
-   ],
-   ...
-}
+        type: String,            # сущность/раздел базы (в данном случае всегда "work")
+        id: Int,                 # id произведения
+        name: String,            # имя
 ```
+Вывод полностью соответевует выдачи для карточек work при запросе по id.   
+см. блок works в разделе [Docs/search-ids.md#Получение-миникарточек-по-их-ID](search-ids.md#Получение-миникарточек-по-их-ID)
+
+
+
+
 
 ## Выставление/удаление оценки
 Запрос
