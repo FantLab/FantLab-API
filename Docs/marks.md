@@ -25,7 +25,7 @@ type - фильтр по типам произведений
 ```
 
 Пример
-> [/user/1/marks?page=1&sort=date&type=novel](https://api.fantlab.ru/user/1/marks?page=2&sort=date&type=novel) - с 1 по 200 оценки (по убыванию даты выставления) creator'а, только романы
+> [/user/1/marks?page=1&sort=date&type=novel](https://api.fantlab.ru/user/1/marks?page=1&sort=date&type=novel) - с 1 по 200 оценки (по убыванию даты выставления) creator'а, только романы
 
 Ответ:
 ```
