@@ -1,5 +1,4 @@
 # Fantlab-API
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API?ref=badge_shield)
 
 Публичный репозиторий по API библиографического краудсорсингового портала **fantlab.ru**.   
 Предназначен для:
