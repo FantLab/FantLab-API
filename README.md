@@ -1,4 +1,5 @@
 # Fantlab-API
+
 Публичный репозиторий по API библиографического краудсорсингового портала **fantlab.ru**.   
 Предназначен для:
 * документирования текущего состояния API
@@ -105,3 +106,7 @@
 
 PS.  
 Предыдущая версия руководства располагается по адресу https://goo.gl/CwQfmb. 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API?ref=badge_large)
