@@ -116,4 +116,4 @@ PS.
 
 
 ## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API?ref=badge_large)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FFantLab%2FFantLab-API?ref=badge_large)
