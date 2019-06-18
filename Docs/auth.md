@@ -19,7 +19,7 @@ password - пароль пользователя
    auth: Boolean,                     # состояние авторизации юзера на сайте (да/нет), 1 - при успешной авторизации
    user_id: Int,                      # id юзера
    user_login: String,                # логин юзера
-   X-Session: String,                 # код сессии (например Z5RrvohMG2v56xph),
+   X-Session: String,                 # код сессии (например: "Z5RrvohMG2v56xph"),
 }
 
 # при неудаче
