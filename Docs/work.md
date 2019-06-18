@@ -36,7 +36,9 @@ GET /work/{id}
     work_description: String,         # аннотация
     work_description_author: String,  # автор анотации (может содержать bb-тэги)
     work_notes: String,               # примечание
-
+    lang: String,                     # язык написания
+    lang_code: String,                # код языка написания
+    
     title: String,                    # автор(ы)+название в формате "Дэн Симмонс «Гиперион»"
     image: String,                    # ссылка на картинку произведения (обложку по умолчанию)
     image_preview: String,            # ссылка на превью картинки произведения
@@ -311,7 +313,7 @@ GET https://fantlab.ru/work{work_id}/analog{analog_work_id}/remove
 ```
 work_id - id произведения
 analog_work_id - id похожего произведения
-cookie - авторизационный хэдер (fl_s=*)
+X-Session - авторизационный сессрил\онный хэдер (или cookie fl_s=*)
 ```
 Пример
 ```
