@@ -20,7 +20,6 @@ password - пароль пользователя
    user_id: Int,                      # id юзера
    user_login: String,                # логин юзера
    X-Session: String,                 # код сессии (например Z5RrvohMG2v56xph),
-   auth_status: String                # сообщение об успешной авторизации
 }
 
 # при неудаче
