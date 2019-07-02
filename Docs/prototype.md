@@ -8,16 +8,16 @@
 5. Тип поля DateTime имеет разное значение в `JSON` и `Protobuf`. В первом случае это строка в формате `{год}-{месяц}-{день}T{часов}:{минут}:{секунд}Z` ([RFC 3339](https://www.ietf.org/rfc/rfc3339.txt)), во втором - UNIX-таймштамп.
 
 ## Содержание
-1. Авторизация
-    * Логин
-2. Форумы
-    * Список форумов
-    * Форум
-    * Тема
-3. Блоги
-    * Список рубрик
-    * Список авторских колонок
-    * Авторская колонка
+1. [Авторизация](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#авторизация)
+    * [Логин](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#логин)
+2. [Форумы](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#форумы)
+    * [Список форумов](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#список-форумов)
+    * [Форум](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#форум)
+    * [Тема](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#тема)
+3. [Блоги](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#блоги)
+    * [Список рубрик](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#список-рубрик)
+    * [Список авторских колонок](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#список-авторских-колонок)
+    * [Авторская колонка](https://github.com/FantLab/FantLab-API/blob/master/Docs/prototype.md#авторская-колонка)
 
 ## Авторизация
 ### Логин
