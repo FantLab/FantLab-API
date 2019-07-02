@@ -39,8 +39,8 @@ GET /v1/forums
                     forum_description: String,     # описание форума
                     moderators:[                   # список модераторов форума
                         {
-                            id: Int,               # id модератора (как пользователя)
-                            login: String          # логин модератора
+                            id: Int,               # id пользователя
+                            login: String          # логин пользователя
                         },
                         ...
                     ],
@@ -138,7 +138,7 @@ limit - количество тем на одной странице (необя
 ### Тема
 Запрос
 ```
-GET /v1/topics/{id}?page={page}&limit=${limit}
+GET /v1/topics/{id}?page={page}&limit={limit}
 ```
 Параметры
 ```
@@ -178,6 +178,152 @@ limit - лимит сообщений в теме (необязательный,
 {
     error_code: 400,
     message: "incorrect topic id: {id}"
+}
+
+Некорректный номер страницы
+{
+    error_code: 400,
+    message: "incorrect page: {page}"
+}
+
+Некорректный лимит
+{
+    error_code: 400,
+    message: "incorrect limit: {limit}"
+}
+```
+
+## Блоги
+### Список рубрик
+Запрос
+```
+GET /v1/communities
+```
+Ответ
+```
+{
+    main:[                                         # основные рубрики
+        {
+            id: Int,                               # id рубрики
+            title: String,                         # название рубрики
+            community_description: String,         # описание рубрики
+            stats: {                               # статистика
+                article_count: Int,                # количество статей
+                subscriber_count: Int              # количество подписчиков
+            },
+            last_article: {                        # последняя статья в рубрике
+                id: Int,                           # id статьи
+                title: String,                     # название статьи
+                user: {                            # автор статьи
+                    id: Int,                       # id пользователя
+                    login: String                  # логин пользователя
+                },
+                date: DateTime                     # дата и время публикации статьи
+            }
+        },
+        ...
+    ],
+    additional:[                                   # дополнительные рубрики
+        ...
+    ]
+}
+```
+
+### Список авторских колонок
+Запрос
+```
+GET /v1/blogs?page={page}&limit={limit}
+```
+Параметры
+```
+page - номер страницы
+limit - количество авторских колонок на одной странице (необязательный, по-умолчанию 50)
+```
+Ответ
+```
+{
+    blogs:[                                 # список авторских колонок
+        {
+            id: Int,                        # id авторской колонки
+            user: {                         # владелец колонки
+                id: Int,                    # id пользователя
+                login: String,              # логин пользователя
+                name: String                # имя пользователя
+            },
+            stats: {                        # статистика
+                article_count: Int,         # количество статей в колонке
+                subscriber_count: Int       # количество подписчиков
+            },
+            last_article: {                 # последняя статья в колонке
+                id: Int,                    # id статьи
+                title: String,              # название статьи
+                date: DateTime              # дата и время публикации статьи
+            }
+        },
+        ...
+    ]
+}
+```
+Возможные ошибки
+```
+Некорректный номер страницы
+{
+    error_code: 400,
+    message: "incorrect page: {page}"
+}
+
+Некорректный лимит
+{
+    error_code: 400,
+    message: "incorrect limit: {limit}"
+}
+```
+
+### Авторская колонка
+Запрос
+```
+GET /v1/blogs/{id}?page={page}&limit={limit}
+```
+Параметры
+```
+id - id авторской колонки
+page - номер страницы
+limit - количество статей на одной странице (необязательный, по-умолчанию 5)
+```
+Ответ
+```
+{
+    articles:[                           # список статей
+        {
+            id: Int,                     # id статьи
+            title: String,               # название статьи
+            creation: {                  # данные о создании
+                user: {                  # автор
+                    id: Int,             # id пользователя
+                    login: String,       # логин пользователя
+                    gender: String,      # пол пользователя (MALE или FEMALE)
+                    avatar: String       # ссылка на аватар пользователя
+                },
+                date: DateTime           # дата публикации статьи
+            },
+            text: String,                # текст статьи
+            tags: String,                # список тегов
+            stats: {                     # статистика
+                like_count: Int,         # количество лайков
+                view_count: Int,         # количество просмотров
+                comment_count: Int       # количество комментариев
+            }
+        },
+        ...
+    ]
+}
+```
+Возможные ошибки
+```
+Некорректный id авторской колонки
+{
+    error_code: 400,
+    message: "incorrect blog id: {id}"
 }
 
 Некорректный номер страницы
