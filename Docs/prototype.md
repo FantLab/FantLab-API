@@ -54,7 +54,7 @@ password - пароль пользователя
 Неверный пароль
 {
     error_code: 401,
-    message: "incorrect_password"
+    message: "incorrect password"
 }
 
 Не удалось создать сессию
