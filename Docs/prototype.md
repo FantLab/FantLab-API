@@ -207,11 +207,14 @@ limit - лимит сообщений в теме (необязательный,
                     login: String,          # логин пользователя
                     gender: String,         # пол пользователя (MALE или FEMALE)
                     avatar: String,         # ссылка на аватар пользователя
-                    class: Int              # класс пользователя
+                    class: Int,             # класс пользователя
+                    sign: String            # подпись на форуме
                 },
                 date: DateTime              # дата и время отправки сообщения
             },
             text: String,                   # текст сообщения
+            is_censored: Boolean,           # текст сообщения вырезан модератором?
+            is_moder_tag_works: Boolean,    # рендерить содержмое тега [moder]...[/moder]? да, если добавлен модератором
             stats: {                        # статистика сообщения
                 plus_count: Int,            # количество плюсов
                 minus_count: Int            # количество минусов
