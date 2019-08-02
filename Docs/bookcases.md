@@ -1,9 +1,150 @@
-# Книжные полки
+# Книжные полки (подборки) юзеров
+
+## Список полок пользователя
+Запрос
+```
+GET /user{user_id}/bookcases
+```
+Отображаются список публичных книжных полок юзера
+
+Параметры
+```
+user_id - id пользователя
+```
+
+Пример
+> https://api.fantlab.ru/user3083/bookcases
+
+Ответ
+```
+[
+    {
+        "bookcase_comment": String|null,            # Комментарий (описание) полки
+        "bookcase_group": String,                   # Тип книжной полки из списка (free, sale, buy, read, wait)
+        "bookcase_id": Int,                         # id книжной полки
+        "bookcase_name": String,                    # Название полки
+        "bookcase_shared": Int,                     # Тип полки: 0 - закрытая, 1 - публичная
+        "bookcase_type": String,                    # Тип книжной полки из списка (work, edition, film)
+        "date_of_add": String,                      # Дата добавления в формате: "2011-04-23 15:59:50"
+        "date_of_edit": String|null,                # Дата последнего редактирования в формате: "2011-04-23 15:59:50"
+        "item_count": Int,                          # Количество элементов на полке
+        "sort": Int                                 # Порядковый номер при сортировке
+    },
+    ...
+]
+```
+
+
+
+## Содержимое книжной полки (подборки)
+
+Запрос
+```
+GET /user{user_id}/bookcase{bookcase_id}?offset={offset}
+вариант - GET /bookcase/{bookcase_id}?offset={offset} # может пока не подерживаться
+```
+Не требует авторизации, но при попытке получить содержимое закрытой полки вернется ошибка. Метод используется для получения содержимого полок всех типов, но ответ будет отличаться для разных типов.
+
+Параметры
+```
+user_id - id пользователя
+bookcase_id - id пользователя
+offset - смещение от начала (не обязательный, по у)
+```
+
+Пример
+> https://api.fantlab.ru/user3083/bookcase3056
+
+Ответ для полки с произведениями:
+```
+{
+    bookcase_id: Int,                        # id книжной полки
+    bookcase_items: [ | null                 # содержимое
+        {
+            bookcase_item_id: Int,           # id item-а книжной полки (счетчик)
+            item_id: Int,                    # id произведения
+            item_comment: String|null,       # комментарий
+            name: String,                    # название произведения
+            rusname: String                  # русскоязычное название произведения
+            autor_name: String|null,         # комбинированная строка с авторами
+            ext: {                           # карточка произведения с полной информацией
+                ...
+            }
+        },
+        ...
+    ],
+    bookcase_type: String,                   # тип книжной полки
+    count: Int,                              # количество item-ов на книжной полке
+    current_page: Int|null,                  # номер текущей страницы (если null, то первая)
+    offset: Int,                             # смещение
+    offset_h: Int,                           # верхняя граница смещения
+    page_count: Int                          # номер текущей страницы
+}
+```
+
+Ответ для полки с изданиями (отличается только структура `bookcase_items`):
+```
+{
+    ...
+    bookcase_items: [ | null                 # содержимое
+        {
+            autors: String,                  # авторы издания
+            bookcase_item_id: Int,           # id item-а книжной полки
+            edition_id: Int,                 # id издания
+            item_comment: String|null,       # комментарий
+            name: String,                    # название издания
+            publisher: String,               # издатель
+            year: Int                        # год издания
+            ext: {                           # карточка издания с полной информацией
+                ...
+            }
+        },
+        ...
+    ],
+    ...
+}
+```
+
+Ответ для полки с фильмами (отличается только структура `bookcase_items`):
+```
+{
+    ...
+    bookcase_items: [ | null                 # содержимое
+        {
+            bookcase_item_id: Int,           # id item-а книжной полки
+            country: String,                 # страна
+            director: String,                # режиссер(ы) фильма
+            film_id: Int,                    # id фильма
+            item_comment: String|null,       # комментарий
+            name: String,                    # название фильма
+            rusname: String,                 # русскоязычное название фильма
+            year: Int                        # год выпуска
+            ext: {                           # карточка фильма с полной информацией
+                ...
+            }
+        },
+        ...
+    ],
+    ...
+}
+```
+
+
+
+---
+
+
+# Свои полки (авторизированные запросы)
+
+Персонализированные авторизованные запросы для работы юзера со своими личными полками просходит в роут-зоне
+/my/bookcases/*
+"/my/" - зона API выделелнная для работа пользователям с своими личными данныме;
+
 
 ## Создание книжной полки
 Запрос
 ```
-/GET https://api.fantlab.ru/my/bookcases/addbookcase?name={name}&type={work|edition|film}&shared={0|1}&comment={comment}
+GET /my/bookcases/addbookcase?name={name}&type={work|edition|film}&shared={0|1}&comment={comment}
 ```
 Требует авторизации (передачи аутентификационного заголовка или кука в запросе)
 
@@ -70,39 +211,6 @@ bookcase_id - id книжной полки для редактирования (
 1 в случае успешного завершения
 ```
 
-## Список полок пользователя
-Запрос
-```
-/GET https://api.fantlab.ru/user{user_id}/bookcases
-```
-Не требует авторизации, но отображаются только открытые полки
-
-Параметры
-```
-user_id - id пользователя
-```
-Пример
-```
-/GET https://api.fantlab.ru/user3083/bookcases
-```
-Ответ
-```
-[
-    {
-        "bookcase_comment": String|null,            # Комментарий (описание) полки
-        "bookcase_group": String,                   # Тип книжной полки из списка (free, sale, buy, read, wait)
-        "bookcase_id": Int,                         # id книжной полки
-        "bookcase_name": String,                    # Название полки
-        "bookcase_shared": Int,                     # Тип полки: 0 - закрытая, 1 - публичная
-        "bookcase_type": String,                    # Тип книжной полки из списка (work, edition, film)
-        "date_of_add": String,                      # Дата добавления в формате: "2011-04-23 15:59:50"
-        "date_of_edit": String|null,                # Дата последнего редактирования в формате: "2011-04-23 15:59:50"
-        "item_count": Int,                          # Количество элементов на полке
-        "sort": Int                                 # Порядковый номер при сортировке
-    },
-    ...
-]
-```
 
 ## Список полок авторизованного пользователя
 Запрос
@@ -124,98 +232,6 @@ user_id - id пользователя
 Идентичен ответу на запрос полок для неавторизованного пользователя
 ```
 
-## Содержимое полки пользователя
-Запрос
-```
-/GET https://api.fantlab.ru/user{user_id}/bookcase{bookcase_id}?offset={offset}
-```
-Не требует авторизации, но при попытке получить содержимое закрытой полки вернется ошибка. Метод используется для получения содержимого полок всех типов, но ответ будет отличаться для разных типов.
-
-Параметры
-```
-user_id - id пользователя
-bookcase_id - id пользователя
-offset - смещение от начала
-```
-Пример
-```
-/GET https://api.fantlab.ru/user3083/bookcase3056
-```
-Ответ для полки с произведениями:
-```
-{
-    bookcase_id: Int,                        # id книжной полки
-    bookcase_items: [ | null                 # содержимое
-        {
-            autor1_name: String|null,        # 1-й автор издания
-            autor2_name: String|null,        # 2-й автор издания
-            autor_name: String|null,         # комбинированная строка с авторами
-            bookcase_item_id: Int,           # id item-а книжной полки
-            item_comment: String|null,       # комментарий
-            item_id: Int,                    # id произведения
-            name: String,                    # название произведения
-            rusname: String                  # русскоязычное название произведения
-            ext: {                           # карточка произведения с полной информацией
-                ...
-            }
-        },
-        ...
-    ],
-    bookcase_type: String,                   # тип книжной полки
-    count: Int,                              # количество item-ов на книжной полке
-    current_page: Int|null,                  # номер текущей страницы (если null, то первая)
-    offset: Int,                             # смещение
-    offset_h: Int,                           # верхняя граница смещения
-    page_count: Int                          # номер текущей страницы
-}
-```
-
-Ответ для полки с изданиями (отличается только структура `bookcase_items`):
-```
-{
-    ...
-    bookcase_items: [ | null                 # содержимое
-        {
-            autors: String,                  # авторы издания
-            bookcase_item_id: Int,           # id item-а книжной полки
-            edition_id: Int,                 # id издания
-            item_comment: String|null,       # комментарий
-            name: String,                    # название издания
-            publisher: String,               # издатель
-            year: Int                        # год издания
-            ext: {                           # карточка издания с полной информацией
-                ...
-            }
-        },
-        ...
-    ],
-    ...
-}
-```
-
-Ответ для полки с фильмами (отличается только структура `bookcase_items`):
-```
-{
-    ...
-    bookcase_items: [ | null                 # содержимое
-        {
-            bookcase_item_id: Int,           # id item-а книжной полки
-            country: String,                 # страна
-            director: String,                # режиссер(ы) фильма
-            film_id: Int,                    # id фильма
-            item_comment: String|null,       # комментарий
-            name: String,                    # название фильма
-            rusname: String,                 # русскоязычное название фильма
-            year: Int                        # год выпуска
-            ext: {                           # карточка фильма с полной информацией
-                ...
-            }
-        },
-        ...
-    ],
-    ...
-}
-```
 ## Содержимое полки авторизованного пользователя
 Запрос
 ```
@@ -310,3 +326,25 @@ type - тип полки
 ]
 
 ```
+
+
+
+---
+Прототип урлов:
+
+GET  /my/bookcases/                                 # список полок
+POST /my/bookcases/add                              # создание новой полки (отправка формы)
+GET  /my/bookcases/<:bookcase_id>                   # инфа о полке
+POST /my/bookcases/<:bookcase_id>/save              # редактирование полки (отправка формы) 
+POST /my/bookcases/<:bookcase_id>/delete            # удалить полку
+
+вместо
+bookcaseclick<:item_id>bc<:bookcase_id>change<:checked>
+
+GET  /my/bookcases/<:bookcase_id>/<:item_id>/add    # добавить на полку 1 позицию
+GET  /my/bookcases/<:bookcase_id>/<:item_id>/delete # убрать с полки 1 позицию
+
+
+toggle
+
+
