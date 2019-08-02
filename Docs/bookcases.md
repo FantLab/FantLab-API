@@ -3,62 +3,145 @@
 ## Создание книжной полки
 Запрос
 ```
-/GET https://fantlab.ru/bookcasecreate{work|edition|film}?name={name}&type={work|edition|film}&shared={on|off}
+/GET https://api.fantlab.ru/my/bookcases/addbookcase?name={name}&type={work|edition|film}&shared={0|1}&comment={comment}
 ```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе)
+
 Параметры
 ```
 name - название полки
-shared - открытая полка (on) или нет (off)
-cookie - авторизационный хэдер (fl_s=*)
+type - тип полки (work - произведения, edition - издания, film - фильмы)
+shared - открытая полка (1) или нет (0)
+comment - текст комментария к книжной полке
 ```
 Пример
 ```
-/GET https://fantlab.ru/bookcasecreateedition?name=Избранное&type=edition&shared=on - создать открытую полку "Избранное" для изданий
+/GET https://api.fantlab.ru/my/bookcases/addbookcase?name=Test%20bookcase&type=work&shared=0&comment=Test%20comment
 ```
 Ответ
 ```
 id новосозданной книжной полки
 ```
-`Как задать в запросе описание и содержимое?`
+
+Примечание: содержимое полки в запросе передать нельзя. Предполагается, что элементы будут добавляться пользователем по одному вручную.
+
+## Редактирование книжной полки
+Запрос
+```
+/GET https://api.fantlab.ru/my/bookcases/editbookcase{bookcase_id}?name={name}&type={work|edition|film}&shared={0|1}&comment={comment}
+```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе)
+
+Параметры
+```
+bookcase_id - id книжной полки для редактирования (передаваемый пользователь должен быть владельцем этой полки)
+name - название полки
+type - тип полки (work - произведения, edition - издания, film - фильмы)
+shared - открытая полка (1) или нет (0)
+comment - текст комментария к книжной полке
+
+```
+Пример
+```
+/GET https://api.fantlab.ru/my/bookcases/editbookcase11945?name=Test%20bookcase&type=work&shared=0&comment=Test%20comment
+```
+Ответ
+```
+1 в случае успешного завершения
+```
 
 ## Удаление книжной полки
 Запрос
 ```
-/GET https://fantlab.ru/user{user_id}/bookcases/deletebookcase{bookcase_id}
+/GET https://api.fantlab.ru/my/bookcases/deletebookcase{bookcase_id}
 ```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе)
+
 Параметры
 ```
-user_id - id пользователя - владельца данной полки (того же, чей cookie)
-bookcase_id - id книжной полки
-cookie - авторизационный хэдер (fl_s=*)
+bookcase_id - id книжной полки для редактирования (передаваемый пользователь должен быть владельцем этой полки)
 ```
 Пример
 ```
-/GET https://fantlab.ru/user123/bookcases/deletebookcase456
+/GET https://api.fantlab.ru/my/bookcases/deletebookcase186919
 ```
 Ответ
 ```
-уточнить
+1 в случае успешного завершения
 ```
 
-
-Общие замечания по запросам содержимого книжных полок:
-- Для всех запросов содержимого тип полки следует знать заранее, поскольку неверный тип полки не является невалидным для данного запроса - просто id будут восприняты как id item-ов другого типа
-- За один раз отдается 10 позиций, так что offset в запросе может принимать значения от `0` до `10 * (page_count - 1)`
-
-## Содержимое полки произведений
+## Список полок пользователя
 Запрос
 ```
-/GET https://fantlab.ru/bookcasechange{id}?offset={offset}&type=work
+/GET https://api.fantlab.ru/user{user_id}/bookcases
 ```
+Не требует авторизации, но отображаются только открытые полки
+
 Параметры
 ```
-id - id книжной полки
+user_id - id пользователя
+```
+Пример
+```
+/GET https://api.fantlab.ru/user3083/bookcases
+```
+Ответ
+```
+[
+    {
+        "bookcase_comment": String|null,            # Комментарий (описание) полки
+        "bookcase_group": String,                   # Тип книжной полки из списка (free, sale, buy, read, wait)
+        "bookcase_id": Int,                         # id книжной полки
+        "bookcase_name": String,                    # Название полки
+        "bookcase_shared": Int,                     # Тип полки: 0 - закрытая, 1 - публичная
+        "bookcase_type": String,                    # Тип книжной полки из списка (work, edition, film)
+        "date_of_add": String,                      # Дата добавления в формате: "2011-04-23 15:59:50"
+        "date_of_edit": String|null,                # Дата последнего редактирования в формате: "2011-04-23 15:59:50"
+        "item_count": Int,                          # Количество элементов на полке
+        "sort": Int                                 # Порядковый номер при сортировке
+    },
+    ...
+]
+```
+
+## Список полок авторизованного пользователя
+Запрос
+```
+/GET https://api.fantlab.ru/my/bookcases/showbookcases
+```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе). В отличие от списка для неавторизованного отдаются все полки (открытые и закрытые)
+
+Параметры
+```
+user_id - id пользователя
+```
+Пример
+```
+/GET https://api.fantlab.ru/my/bookcases/showbookcases
+```
+Ответ
+```
+Идентичен ответу на запрос полок для неавторизованного пользователя
+```
+
+## Содержимое полки пользователя
+Запрос
+```
+/GET https://api.fantlab.ru/user{user_id}/bookcase{bookcase_id}?offset={offset}
+```
+Не требует авторизации, но при попытке получить содержимое закрытой полки вернется ошибка. Метод используется для получения содержимого полок всех типов, но ответ будет отличаться для разных типов.
+
+Параметры
+```
+user_id - id пользователя
+bookcase_id - id пользователя
 offset - смещение от начала
 ```
 Пример
-> [/bookcasechange518?offset=10&type=work](https://fantlab.ru/bookcasechange518?offset=10&type=work) - 2 страница полки "e-texts (engl) - антологии" Claviceps P.
-Ответ
+```
+/GET https://api.fantlab.ru/user3083/bookcase3056
+```
+Ответ для полки с произведениями:
 ```
 {
     bookcase_id: Int,                        # id книжной полки
@@ -72,6 +155,9 @@ offset - смещение от начала
             item_id: Int,                    # id произведения
             name: String,                    # название произведения
             rusname: String                  # русскоязычное название произведения
+            ext: {                           # карточка произведения с полной информацией
+                ...
+            }
         },
         ...
     ],
@@ -84,31 +170,22 @@ offset - смещение от начала
 }
 ```
 
-## Содержимое полки изданий
-Запрос
-```
-/GET https://fantlab.ru/bookcasechange{id}?offset={offset}&type=edition
-```
-Параметры
-```
-id - id книжной полки
-offset - смещение от начала
-```
-Пример
-> [/bookcasechange1?offset=10&type=edition](https://fantlab.ru/bookcasechange1?offset=10&type=edition) - 2 страница полки "Фантлаб рекомендует"
-
-Ответ (отличается только массив `bookcase_items`)
+Ответ для полки с изданиями (отличается только структура `bookcase_items`):
 ```
 {
-    bookcase_items: [ | null
+    ...
+    bookcase_items: [ | null                 # содержимое
         {
             autors: String,                  # авторы издания
             bookcase_item_id: Int,           # id item-а книжной полки
             edition_id: Int,                 # id издания
             item_comment: String|null,       # комментарий
-            name: String,                    # название издания 
+            name: String,                    # название издания
             publisher: String,               # издатель
             year: Int                        # год издания
+            ext: {                           # карточка издания с полной информацией
+                ...
+            }
         },
         ...
     ],
@@ -116,23 +193,11 @@ offset - смещение от начала
 }
 ```
 
-## Содержимое полки фильмов
-Запрос
-```
-/GET https://fantlab.ru/bookcasechange{id}?offset={offset}&type=film
-```
-Параметры
-```
-id - id книжной полки
-offset - смещение от начала
-```
-Пример
-> [/bookcasechange488?offset=0&type=film](https://fantlab.ru/bookcasechange488?offset=0&type=film) - 1 страница полки "Любимая фантастика" vad'a
-
-Ответ (отличается только массив `bookcase_items`)
+Ответ для полки с фильмами (отличается только структура `bookcase_items`):
 ```
 {
-    bookcase_items: [ | null
+    ...
+    bookcase_items: [ | null                 # содержимое
         {
             bookcase_item_id: Int,           # id item-а книжной полки
             country: String,                 # страна
@@ -142,56 +207,106 @@ offset - смещение от начала
             name: String,                    # название фильма
             rusname: String,                 # русскоязычное название фильма
             year: Int                        # год выпуска
+            ext: {                           # карточка фильма с полной информацией
+                ...
+            }
         },
         ...
     ],
+    ...
 }
 ```
-
-## Добавление или удаление произведения с книжной полки
+## Содержимое полки авторизованного пользователя
 Запрос
 ```
-/GET https://fantlab.ru/bookcaseclick{work_id}bc{bookcase_id}change{true|false}
+/GET https://api.fantlab.ru/my/bookcases/viewbookcase{bookcase_id}?offset={offset}
 ```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе). В отличие от запроса для неавторизованного отдаются все полки (открытые и закрытые). Но при попытке просмотреть полку с владельцем, не совпадающим с переданным, вернется ошибка. Метод используется для получения содержимого полок всех типов, но ответ будет отличаться для разных типов.
+
 Параметры
 ```
-work_id - id проивзедения
-bookcase_id - id книжной полки
-change - добавить (true) или удалить (false)
-cookie - авторизационный хэдер (fl_s=*)
+user_id - id пользователя
+bookcase_id - id пользователя
+offset - смещение от начала
 ```
 Пример
 ```
-/GET https://fantlab.ru/bookcaseclick1bc1changetrue - добавить "Гиперион" Дэна Симмонса на книжную полку с id = 1
+/GET https://api.fantlab.ru/my/bookcases/viewbookcase3056
+```
+Ответ для полки с произведениями:
+```
+Идентичен ответу для неавторизованного
+```
+
+## Добавление или удаление элементов с книжной полки
+Запрос
+```
+/GET https://api.fantlab.ru/my/bookcases/bookcaseclick{item_id}bc{bookcase_id}change{true|false}
+```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе).
+
+Параметры
+```
+item_id - id элемента (произведения, издания или фильма)
+bookcase_id - id книжной полки
+change - добавить (true) или удалить (false)
+```
+Пример
+```
+/GET https://api.fantlab.ru/my/bookcases/bookcaseclick1bc1changetrue - добавить "Гиперион" Дэна Симмонса на книжную полку с id = 1
 ```
 Ответ
 ```
-пустой HTML-шаблон
+Количество элементов на полке после изменения
 ```
-
-## Добавление или удаление издания с книжной полки
-То же самое, что и при добавлении/удалении произведения, только вместо `work_id` подставляется `edition_id`.
-
-## Добавление или удаление фильма с книжной полки
-То же самое, что и при добавлении/удалении произведения, только вместо `work_id` подставляется `film_id`.
 
 ## Добавление комментария к item
 Запрос
 ```
-/GET https://fantlab.ru/bookcasecomm{bookcase_id}item{item_id}comm?txt={comment}
+/GET https://api.fantlab.ru/my/bookcases/bookcasecomm{bookcase_id}item{item_id}comm?txt={comment}
 ```
-Ответ
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе).
+
+Параметры
 ```
 bookcase_id - id книжной полки
 item_id - id item'а
-comment - комментарий
-cookie - авторизационный хэдер (fl_s=*)
+txt - комментарий
 ```
 Пример
 ```
-/GET https://fantlab.ru/bookcasecomm123item456comm?txt=Есть
+/GET https://api.fantlab.ru/my/bookcases/bookcasecomm123item456comm?txt=Есть
 ```
 Ответ
 ```
-пустой HTML-шаблон
+1 в случае успеха
+```
+
+## Наличие элемента на книжных полках
+Запрос
+```
+/GET https://api.fantlab.ru/my/bookcases/viewitem{item_id}?type={work|edition|film}
+```
+Требует авторизации (передачи аутентификационного заголовка или кука в запросе). Возвращает список всех полок пользователя данного типа с признаком, присутствует ли данный элемент на этой полке
+
+Параметры
+```
+item_id - id item'а
+type - тип полки
+```
+Пример
+```
+/GET https://api.fantlab.ru/my/bookcases/viewitem281.json?type=edition
+```
+Ответ (список полок)
+```
+[
+    {
+        "bookcase_id": Int,                         # id книжной полки
+        "bookcase_name": String,                    # Название полки
+        "item_added": Int,                          # Возвращается 1, если элемент присутствует на данной полке, и 0, если нет
+    },
+    ...
+]
+
 ```
