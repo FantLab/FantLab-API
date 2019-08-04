@@ -330,21 +330,22 @@ type - тип полки
 
 
 ---
-Прототип урлов:
+Обновленные роуты:
 
+```
 GET  /my/bookcases/                                 # список полок
 POST /my/bookcases/add                              # создание новой полки (отправка формы)
 GET  /my/bookcases/<:bookcase_id>                   # инфа о полке
 POST /my/bookcases/<:bookcase_id>/save              # редактирование полки (отправка формы) 
 POST /my/bookcases/<:bookcase_id>/delete            # удалить полку
 
-вместо
-bookcaseclick<:item_id>bc<:bookcase_id>change<:checked>
+GET  /my/bookcases/<:bookcase_id>/items/<:item_id>/add       # добавить на полку 1 позицию
+GET  /my/bookcases/<:bookcase_id>/items/<:item_id>/delete    # убрать с полки 1 позицию
+GET  /my/bookcases/<:bookcase_id>/items/<:item_id>/editcomm  # записать комменатрий к позиции
 
-GET  /my/bookcases/<:bookcase_id>/<:item_id>/add    # добавить на полку 1 позицию
-GET  /my/bookcases/<:bookcase_id>/<:item_id>/delete # убрать с полки 1 позицию
+GET  /my/bookcases/viewitem<:item_type>/items/<:item_id>     # на каких полках есть эта позиция у юзера
+``
 
 
-toggle
 
 
