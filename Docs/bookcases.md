@@ -154,7 +154,7 @@ comment - текст комментария к книжной полке
 ```
 
 Пример
-> https://api.fantlab.ru/my/bookcases/add?name=Test%20bookcase&type=work&shared=0&comment=Test%20comment
+> POST //api.fantlab.ru/my/bookcases/add?name=Test%20bookcase&type=work&shared=0&comment=Test%20comment
 
 Ответ
 ```
@@ -180,7 +180,7 @@ comment - текст комментария к книжной полке
 
 ```
 Пример
-> /my/bookcases/11945/edit?name=Test%20bookcase&type=work&shared=0&comment=Test%20comment
+> POST //api.fantlab.ru/my/bookcases/11945/edit?name=Test%20bookcase&type=work&shared=0&comment=Test%20comment
 
 Ответ
 ```
@@ -201,7 +201,7 @@ bookcase_id - id книжной полки для редактирования (
 ```
 
 Пример
-> https://api.fantlab.ru/my/bookcases/186919/delete
+> DELETE //api.fantlab.ru/my/bookcases/186919/delete
 
 Ответ
 ```
@@ -248,7 +248,7 @@ item_id - id элемента (произведения, издания или �
 bookcase_id - id книжной полки
 ```
 Пример
-> https://api.fantlab.ru/my/bookcases/3056/items/1/add - добавить "Гиперион" Дэна Симмонса на книжную полку с id = 3056
+> POST api.fantlab.ru/my/bookcases/3056/items/1/add - добавить "Гиперион" Дэна Симмонса на книжную полку с id = 3056
 
 Ответ
 ```
@@ -271,7 +271,7 @@ txt - комментарий
 ```
 
 Пример
-> /my/bookcases/123/items/456/editcomm?txt=Отдал%20Васе
+> POST /my/bookcases/123/items/456/editcomm?txt=Отдал%20Васе
 
 Ответ
 ```
@@ -318,7 +318,7 @@ type - тип полки (work|edition|film)
 ```
 
 Пример
-> https://api.fantlab.ru/my/bookcases/type/edition/281
+> https://api.fantlab.ru/my/bookcases/type/edition/281 - список полок типа "издания" с проверкой наличиия на них edition281
 
 Ответ (список полок)
 ```
