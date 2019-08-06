@@ -15,7 +15,7 @@ user_id - id пользователя
 ```
 
 Пример
-> https://api.fantlab.ru/user/2/bookcases - список публичных полок юзера "Р.Букашка"
+> https://api.fantlab.ru/user/2/bookcases - список публичных полок юзера "Р.Букашка" (user_id 2)
 
 Ответ
 ```
@@ -52,7 +52,7 @@ offset - смещение от начала (не обязательный, по
 ```
 
 Пример
-> https://api.fantlab.ru/user/2/bookcase/8180 - одно полка юзера"Р.Букашка"
+> https://api.fantlab.ru/user/2/bookcase/8180 - одна полка (bookcase_id 8180) юзера"Р.Букашка" (user_id 2)
 
 Ответ для полки с произведениями:
 ```
