@@ -141,7 +141,7 @@ offset - смещение от начала (не обязательный, по
 ## Создание книжной полки
 Запрос
 ```
-AUTH POST /my/bookcases/add?name={name}&type={work|edition|film}&shared={0|1}&comment={comment}
+AUTH POST /my/bookcases/add?name={name}&type={work|edition|film}&shared={on|off}&comment={comment}
 ```
 *Требует авторизации (передачи аутентификационного заголовка или кука в запросе)*
 
@@ -149,7 +149,7 @@ AUTH POST /my/bookcases/add?name={name}&type={work|edition|film}&shared={0|1}&co
 ```
 name - название полки
 type - тип полки (work - произведения, edition - издания, film - фильмы)
-shared - открытая полка (1) или нет (0)
+shared - открытая полка (on) или нет (off)
 comment - текст комментария к книжной полке
 ```
 
@@ -166,7 +166,7 @@ id новосозданной книжной полки
 ## Редактирование книжной полки
 Запрос
 ```
-AUTH POST /my/bookcases/{bookcase_id}/edit?name={name}&type={work|edition|film}&shared={0|1}&comment={comment}
+AUTH POST /my/bookcases/{bookcase_id}/edit?name={name}&type={work|edition|film}&shared={on|off}&comment={comment}
 ```
 *Требует авторизации (передачи аутентификационного заголовка или кука в запросе)*
 
@@ -175,7 +175,7 @@ AUTH POST /my/bookcases/{bookcase_id}/edit?name={name}&type={work|edition|film}&
 bookcase_id - id книжной полки для редактирования (передаваемый пользователь должен быть владельцем этой полки)
 name - название полки
 type - тип полки (work - произведения, edition - издания, film - фильмы)
-shared - открытая полка (1) или нет (0)
+shared - открытая полка (on) или нет (off)
 comment - текст комментария к книжной полке
 
 ```
