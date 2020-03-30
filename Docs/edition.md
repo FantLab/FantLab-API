@@ -11,17 +11,17 @@ GET /edition/{id}
 
 Ответ
 ```
-    edition_id: Int,          # id издания
-    edition_name: String,     # название издания
-    edition_type: String,     # тип издания
-    edition_type_plus: [      # доп. типы издания
+    edition_id: Int,           # id издания
+    edition_name: String,      # название издания
+    edition_type: String,      # тип издания
+    edition_type_plus: [       # доп. типы издания
         ...: String|null,
         ...
     ],
-    edition_work_id: Int,     # id произведения, где содержание такое же как в издании (для журнал/сборник/антология) (или null)
-    copies: Int,              # тираж (0, если неизвестен)
-    correct_level: Float,     # степень проверенности издания (0 - не проверено, 0.5 - не полностью проверено, 1 - проверено)
-    cover_type: String,       # тип обложки
+    edition_work_id: Int|null, # id произведения, где содержание такое же как в издании (журнал/сборник/антология)
+    copies: Int,               # тираж (0, если неизвестен)
+    correct_level: Float,      # степень проверенности издания (0 - не проверено, 0.5 - не полностью проверено, 1 - проверено)
+    cover_type: String,        # тип обложки
     creators: {
         authors: [ |null               # список авторов
             {
