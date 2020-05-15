@@ -209,7 +209,7 @@ la_resume         - линговопрофиль произведения*
 ## Похожие произведения
 Запрос
 ```
-GET /work{id}/similars
+GET /work/{id}/similars
 ```
 
 Пример:
