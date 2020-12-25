@@ -60,9 +60,9 @@ onlymatches - выдавать только содержимое массива 
 ```
 
 Пример
-> [/search-forum.json?q=фантастика&forums=14&t=t&alg=0&period=0&sortby=dat&page=1&onlymatches=1](https://api.fantlab.ru/search-forum.json?q=фантастика&forums=14&t=t&alg=0&period=0&sortby=dat&page=1&onlymatches=1) - поиск тем со словом "фантастика" в названии, за все время с сортировкой по дате
+> [/search-forum.json?q=фантастика&forums=14&t=t&onlymatches=1](https://api.fantlab.ru/search-forum.json?q=фантастика&forums=14&t=t&onlymatches=1) - поиск тем со словом "фантастика" в названии в форуме "Произведения, авторы, жанры" за все время
 
-Ответ (при запросе с параметрами **t=t** и **onlymatches=1**)
+Ответ (при запросе с параметром **onlymatches=1**)
 ```
 [
     {
@@ -84,7 +84,10 @@ onlymatches - выдавать только содержимое массива 
 ]
 ```
 
-Ответ (при запросе с параметрами **t=m** и **onlymatches=1**)
+Пример
+> [/search-forum.json?q=фантастика&t=m&onlymatches=1](https://api.fantlab.ru/search-forum.json?q=фантастика&t=m&onlymatches=1) - поиск сообщений со словом "фантастика" в тексте по всем форумам за все время
+
+Ответ (при запросе с параметром **onlymatches=1**)
 ```
 [
     {
