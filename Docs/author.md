@@ -64,6 +64,7 @@ GET /autor/{id}
     autor_id: Int,                    # id автора (дубль, название переменной с типом)
     url: Url                          # ссылка на страницу автора
     last_modified: DateTime,          # дата последнего редактирования
+    last_modified_iso: DateTime,      # дата последнего редактирования в ISO 8601
 
     is_opened: Boolean,               # открыта ли страница автора
     anons: String,                    # краткий анонс биографии
