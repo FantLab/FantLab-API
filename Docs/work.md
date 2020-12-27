@@ -14,6 +14,7 @@ GET /work/{id}
 {
     work_id: Int,                     # id произведения
     last_modified: DateTime,          # время последнего изменения данных
+    last_modified_iso: DateTime,      # время последнего изменения данных в ISO 8601
     work_name: String,                # название произведения
     work_name_orig: String,           # оригинальное название (анг или родной)
     work_name_alts: [                 # массив альтернативных названий произведения
