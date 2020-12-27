@@ -24,6 +24,7 @@ id - id пользователя
    fio: String,                       # фио юзера (необязательный)
    sex: String,                       # пол (m - мужской, w - женский)
    birthday: DateTime,                # дата рождения
+   birthday_iso: DateTime,            # дата рождения в ISO 8601
 
    user_class: Int,                   # id класса развития
    class_name: String,                # названия класса развития на сайте
@@ -36,7 +37,9 @@ id - id пользователя
    city_id: Int,                      # id города по внутренний базе 
 
    date_of_reg: DateTime,             # дата регистрации на сайте
+   date_of_reg_iso: DateTime,         # дата регистрации на сайте в ISO 8601
    date_of_last_action: DateTime,     # дата последнего посещения сайта
+   date_of_last_action_iso: DateTime, # дата последнего посещения сайта в ISO 8601
    user_timer: Int,                   # сколько времени был на сайте за последение 30 дней (секунды)
    sign: String,                      # подпись под постами на форуме
 
@@ -62,7 +65,9 @@ id - id пользователя
 
    block: Boolean,                    # юзер в бане (0 - нет / 1 - да)     
    date_of_block: DateTime,           # дата начало бана
+   date_of_block_iso: DateTime,       # дата начало бана в ISO 8601
    date_of_block_end: DateTime,       # дата окончание бана (если null - бан вечный)
+   date_of_block_end_iso: DateTime    # дата окончание бана в ISO 8601 (если null - бан вечный)
 }
 ```
 
