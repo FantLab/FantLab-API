@@ -370,7 +370,7 @@ onlymatches - выдавать только содержимое массива 
 
 Пример
 
-> [/search-films?q=Лавкрафт&page=1&onlymatches=1](/search-films?q=Лавкрафт&page=1&onlymatches=1) - поиск по фразе "Лавкрафт"
+> [/search-films?q=Лавкрафт&page=1&onlymatches=1](https://api.fantlab.ru/search-films?q=Лавкрафт&page=1&onlymatches=1) - поиск по фразе "Лавкрафт"
 
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -410,7 +410,7 @@ onlymatches - выдавать только содержимое массива 
 
 Пример
 
-> [/search-articles?q=Лавкрафт&page=1&onlymatches=1](/search-articles?q=Лавкрафт&page=1&onlymatches=1) - поиск по фразе "Лавкрафт"
+> [/search-articles?q=Лавкрафт&page=1&onlymatches=1](https://api.fantlab.ru/search-articles?q=Лавкрафт&page=1&onlymatches=1) - поиск по фразе "Лавкрафт"
 
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
@@ -446,7 +446,7 @@ onlymatches - выдавать только содержимое массива 
 
 Пример
 
-> [/search-terms?q=Анабиоз&page=1&onlymatches=1](/search-terms?q=Анабиоз&page=1&onlymatches=1) - поиск по фразе "Анабиоз"
+> [/search-terms?q=Анабиоз&page=1&onlymatches=1](https://api.fantlab.ru/search-terms?q=Анабиоз&page=1&onlymatches=1) - поиск по фразе "Анабиоз"
 
 Ответ (при запросе с параметром **onlymatches=1**)
 ```
